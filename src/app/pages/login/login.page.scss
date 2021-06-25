@@ -1,5 +1,16 @@
+ion-content{
+  --background: #fff url('/assets/img/fundoSoja.jpeg') no-repeat center center / cover;
+}
+
 ion-segment {
   --background: #87bd27;
+}
+
+.rodape {
+  position: absolute;
+  left: 15%;
+  right: 0;
+  bottom: 0;
 }
 
 .container {
@@ -30,7 +41,8 @@ ion-slides {
   .slide-inner {
     width: 75%;
     color: #fff;
-    background-color: #165741;
+    background-color: rgba(48, 75, 45, 0.85);
+
     border-radius: 10px;
 
     ion-item {
@@ -59,7 +71,7 @@ ion-slides {
     left: 0;
     right: 0;
     height: 146px;
-    background-image: url('/assets/img/plantas.png');
+    //background-image: url('/assets/img/plantas.png');
     background-size: contain;
     transition: all 0.5s;
   }
