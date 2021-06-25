@@ -1,8 +1,14 @@
 <ion-content>
-  <div class="container top">
-    <img src="/assets/img/coprossel.png">
 
-    <ion-segment (ionChange)="segmentChanged($event)" mode="ios" value="login">
+
+
+  <div class="container top">
+<!--    <img src="/assets/img/coprossel.png">-->
+    <div align="center">
+      <img style="max-width: 200px; max-height: 100px; width: auto; height: auto" src="/assets/img/coprossel.png">
+    </div>
+
+    <ion-segment style="margin-top: 2%" (ionChange)="segmentChanged($event)" mode="ios" value="login">
       <ion-segment-button value="login">
         <ion-label>Login</ion-label>
       </ion-segment-button>
@@ -14,7 +20,7 @@
 
   <ion-slides>
     <ion-slide>
-      <div class="slide-inner ion-padding">
+      <div  class="slide-inner ion-padding">
         <span>Login</span>
 
         <ion-item class="ion-margin-top" lines="none">
@@ -32,7 +38,7 @@
     </ion-slide>
 
     <ion-slide>
-      <div style="margin-top: 35%" class="slide-inner ion-padding">
+      <div style="margin-top: 15%" class="slide-inner ion-padding">
         <span>Cadastro</span>
 
         <ion-item class="ion-margin-top" lines="none">
@@ -58,6 +64,11 @@
     </ion-slide>
   </ion-slides>
 
+  <div class="container bottom">
+    <div align="center">
+      <img style="max-width: 140px; max-height: 40px; width: auto; height: auto" src="/assets/img/LOGOVIA.png">
+    </div>
+  </div>
 <!-- <div class="ocean">-->
 <!--    <div class="waves" [ngStyle]="{'background-position-x': wavesPosition + 'px'}">-->
 

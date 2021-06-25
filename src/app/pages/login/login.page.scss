@@ -1,9 +1,9 @@
 ion-content{
-  --background: #fff url('/assets/img/fundoSoja.jpeg') no-repeat center center / cover;
+  --background: #fff url('/assets/img/fundoSemLogo.jpeg') no-repeat center center / cover;
 }
 
 ion-segment {
-  --background: #87bd27;
+  --background: #1ac358;
 }
 
 .rodape {
@@ -23,11 +23,11 @@ ion-segment {
 
 
   &.top {
-    top: 5%;
+    top: 0;
   }
 
   &.bottom {
-    bottom: 30%;
+    bottom: 1%;
     span {
       color: #fff;
     }
@@ -41,7 +41,7 @@ ion-slides {
   .slide-inner {
     width: 75%;
     color: #fff;
-    background-color: rgba(48, 75, 45, 0.85);
+    background-color: rgb(18, 87, 56, 0);
 
     border-radius: 10px;
 

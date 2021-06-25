@@ -1,5 +1,7 @@
 {
   "name": "agendador",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
