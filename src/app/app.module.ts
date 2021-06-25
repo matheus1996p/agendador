@@ -10,14 +10,14 @@ import { AngularFireModule} from "@angular/fire";
 import {environment} from "../environments/environment";
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule, AngularFirestoreModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Keyboard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

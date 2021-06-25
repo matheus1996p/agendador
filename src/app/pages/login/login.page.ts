@@ -3,6 +3,7 @@ import {IonSlides, LoadingController, ToastController} from "@ionic/angular";
 import {User} from "../../interfaces/user";
 import {AuthService} from "../../services/auth.service";
 import {AngularFirestore} from "@angular/fire/firestore";
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginPage implements OnInit {
   constructor(private loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
               private authService: AuthService,
-              private afs: AngularFirestore) { }
+              private afs: AngularFirestore,
+              public keyboard: Keyboard) { }
 
   ngOnInit() {
   }

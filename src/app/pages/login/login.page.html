@@ -2,7 +2,7 @@
 
 
 
-  <div class="container top">
+  <div class="container top" [hidden]="keyboard.isVisible">
 <!--    <img src="/assets/img/coprossel.png">-->
     <div align="center">
       <img style="max-width: 200px; max-height: 100px; width: auto; height: auto" src="/assets/img/coprossel.png">
@@ -64,7 +64,7 @@
     </ion-slide>
   </ion-slides>
 
-  <div class="container bottom">
+  <div class="container bottom" [hidden]="keyboard.isVisible">
     <div align="center">
       <img style="max-width: 140px; max-height: 40px; width: auto; height: auto" src="/assets/img/LOGOVIA.png">
     </div>
