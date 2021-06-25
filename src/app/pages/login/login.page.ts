@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonSlides, LoadingController, ToastController} from "@ionic/angular";
 import {User} from "../../interfaces/user";
 import {AuthService} from "../../services/auth.service";
+import {AngularFirestore} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginPage implements OnInit {
 
   constructor(private loadingCtrl: LoadingController,
               private toastCtrl: ToastController,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private afs: AngularFirestore) { }
 
   ngOnInit() {
   }
@@ -52,7 +54,10 @@ export class LoginPage implements OnInit {
     await this.presentLoading();
 
     try {
-      await this.authService.register(this.userRegister);
+      const user = await this.authService.register(this.userRegister);
+      const newUser = Object.assign({}, this.userRegister);
+      delete newUser.senha;
+      await this.afs.collection('Users').doc(user.user.uid).set(newUser);
     } catch (error) {
       let message: string;
       switch (error.code) {
