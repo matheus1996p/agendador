@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="header">
+    <ion-grid>
+      <ion-row class="ion-text-center ion-aling-items-center">
+        <ion-col size="2">
+          <ion-icon  size="large" name="calendar-clear-outline"></ion-icon>
+          <!--          <img src="/assets/img/fundoSemLogo.jpeg">-->
+        </ion-col>
+        <ion-col size="8"></ion-col>
+        <ion-col size="2">
+          <ion-icon (click)="logout();" size="large" name="log-out-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
+  <div class="main-poster">
+    <span style="margin-left: 5%">USUÁRIO</span>
+    <div align="center">
+
+      <span class="nomeUsuario">MATHEUS PACHECO DA SILVA</span>
+    </div>
+  </div>
 </ion-content>

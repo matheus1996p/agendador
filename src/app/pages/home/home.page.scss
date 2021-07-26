@@ -1,0 +1,34 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+ion-content{
+  --background: #fff url('/assets/img/home.jpeg') no-repeat center center / cover;
+}
+
+
+.main-poster {
+  .nomeUsuario {
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  top: 35%;
+
+  color: #ffffff;
+  font-size: 18px;
+
+
+}
+
+ion-icon {
+  color: #ffffff;
+}

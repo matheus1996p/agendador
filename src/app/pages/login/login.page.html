@@ -1,9 +1,6 @@
 <ion-content>
 
-
-
   <div class="container top" [hidden]="keyboard.isVisible">
-<!--    <img src="/assets/img/coprossel.png">-->
     <div align="center">
       <img style="max-width: 200px; max-height: 100px; width: auto; height: auto" src="/assets/img/coprossel.png">
     </div>
@@ -38,8 +35,12 @@
     </ion-slide>
 
     <ion-slide>
-      <div style="margin-top: 15%" class="slide-inner ion-padding">
+      <div style="margin-top: 25%" class="slide-inner ion-padding">
         <span>Cadastro</span>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text" placeholder="Nome" [(ngModel)]="userRegister.usuario"></ion-input>
+        </ion-item>
 
         <ion-item class="ion-margin-top" lines="none">
           <ion-input type="text" placeholder="CPF" [(ngModel)]="userRegister.cpf"></ion-input>
@@ -69,15 +70,7 @@
       <img style="max-width: 140px; max-height: 40px; width: auto; height: auto" src="/assets/img/LOGOVIA.png">
     </div>
   </div>
-<!-- <div class="ocean">-->
-<!--    <div class="waves" [ngStyle]="{'background-position-x': wavesPosition + 'px'}">-->
 
-<!--    </div>-->
-
-<!-- </div>-->
-<!--  <div class="rodape">-->
-<!--    <img src="/assets/img/fundotransp.jpeg">-->
-<!--  </div>-->
 </ion-content>
 
 
