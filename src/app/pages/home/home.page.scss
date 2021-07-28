@@ -6,7 +6,7 @@
   z-index: 1;
 }
 
-ion-content{
+#home{
   --background: #fff url('/assets/img/home.jpeg') no-repeat center center / cover;
 }
 
@@ -32,3 +32,31 @@ ion-content{
 ion-icon {
   color: #ffffff;
 }
+
+.monthview-selected {
+  background-color: red;
+}
+
+td {
+  border: none !important;
+}
+
+.monthview-current{
+  background-color: #5d58e0 !important;
+}
+
+calendar {
+  color: #ffffff;
+}
+
+.monthview-selected{
+  font-weight: bold;
+  background-color: #F1F1F1 !important;
+  color: #333 !important;
+}
+
+//.dayOff{
+//  border-top: #f53d3d;
+//  border-bottom-width: thin;
+//  border-top-style: solid;
+//}

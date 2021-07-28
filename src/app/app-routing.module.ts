@@ -19,6 +19,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     canActivate: [LoginGuard]
   },
+  {
+    path: 'cal-modal',
+    loadChildren: () => import('./pages/cal-modal/cal-modal.module').then( m => m.CalModalPageModule)
+  },
+  {
+    path: 'cadastro',
+    loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule)
+  }
 ];
 
 @NgModule({
