@@ -21,11 +21,13 @@ const routes: Routes = [
   },
   {
     path: 'cal-modal',
-    loadChildren: () => import('./pages/cal-modal/cal-modal.module').then( m => m.CalModalPageModule)
+    loadChildren: () => import('./pages/cal-modal/cal-modal.module').then( m => m.CalModalPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'cadastro',
-    loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule)
+    loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

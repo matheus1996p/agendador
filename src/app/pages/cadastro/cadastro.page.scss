@@ -1,0 +1,21 @@
+.body {
+  margin-top: 50%;
+}
+
+.footer{
+  margin-top: 15%;
+}
+
+#tela{
+  --background: #fff url('/assets/img/telas.jpeg') fixed center center / cover;
+  //background: url('/assets/img/telas.jpeg') ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.botoes {
+  color: #ffffff;
+  background-color: #00883c;
+}
