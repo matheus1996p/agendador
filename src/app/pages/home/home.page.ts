@@ -3,6 +3,7 @@ import {AuthService} from "../../services/auth.service";
 import {CalendarComponent, NgCalendarModule} from "ionic2-calendar";
 import {AngularFirestore} from "@angular/fire/firestore";
 import {User} from "../../interfaces/user";
+import {PrimeNGConfig} from "primeng/api";
 
 @Component({
   selector: 'app-home',
@@ -19,19 +20,35 @@ export class HomePage implements OnInit {
     currentDate: new Date()
   };
 
+  value: Date;
+  pt: any;
+
   selected: Date | null;
 
 
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
   constructor(private authService: AuthService,
-              private afs: AngularFirestore) {
+              private afs: AngularFirestore,
+              private config: PrimeNGConfig) {
   }
 
   onChange($event) {
     console.log($event);
   }
   ngOnInit() {
+    this.config.setTranslation({
+      accept: 'Aceitar',
+      reject: 'Cancelar',
+      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      monthNames: ['JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO', 'JULHO',
+        'AGOSTO', 'SETEMBRO', 'OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'],
+      monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      today: 'Hoje',
+      clear: 'Limpar'
+    });
     this.getUsuarioLogado();
   }
 

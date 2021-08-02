@@ -88,3 +88,53 @@ mat-button-toggle {
   font-style: bold;
 }
 
+::ng-deep .p-component, .p-component * {
+  /* box-sizing: border-box; */
+  background-color: #225536;
+  color: #ffffff;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-next {
+  width: 2rem;
+  height: 2rem;
+  color: #ffffff;
+  border: 0 none;
+  background: transparent;
+  background-color: #225536;
+  border-radius: 20%;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-prev {
+  width: 2rem;
+  height: 2rem;
+  color: #ffffff;
+  border: 0 none;
+  background: transparent;
+  background-color: #225536;
+  border-radius: 20%;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+::ng-deep .p-datepicker td>span, .p-monthpicker-month {
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  font-weight: bold;
+  font-family: "Arial Black";
+}
+
+::ng-deep .p-datepicker-header .p-datepicker-title {
+  margin: 0 auto;
+  font-weight: bold;
+  font-family: "Arial Black";
+}
+
+
+
+

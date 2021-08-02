@@ -14,12 +14,13 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import {HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from "@angular/material/expansion";
+import {CalendarModule} from "primeng/calendar";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule, AngularFirestoreModule, BrowserAnimationsModule, MatExpansionModule],
+    AngularFireAuthModule, AngularFirestoreModule, BrowserAnimationsModule, MatExpansionModule, CalendarModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Keyboard],
   bootstrap: [AppComponent],
 })
