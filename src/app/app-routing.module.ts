@@ -28,6 +28,15 @@ const routes: Routes = [
     path: 'cadastro',
     loadChildren: () => import('./pages/cadastro/cadastro.module').then( m => m.CadastroPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'modal-senha',
+    loadChildren: () => import('./pages/modal-senha/modal-senha.module').then( m => m.ModalSenhaPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'permissoes',
+    loadChildren: () => import('./pages/permissoes/permissoes.module').then( m => m.PermissoesPageModule)
   }
 ];
 
