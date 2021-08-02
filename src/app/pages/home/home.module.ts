@@ -17,6 +17,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {CalendarModule} from "primeng/calendar";
+import {SelectButtonModule} from "primeng/selectbutton";
 registerLocaleData(localept, 'pt');
 
 @NgModule({
@@ -33,7 +34,8 @@ registerLocaleData(localept, 'pt');
     MatFormFieldModule,
     MatNativeDateModule,
     MatButtonToggleModule,
-    CalendarModule
+    CalendarModule,
+    SelectButtonModule
   ],
   declarations: [HomePage],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' },{provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}]

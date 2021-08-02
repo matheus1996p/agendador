@@ -22,6 +22,8 @@ export class HomePage implements OnInit {
 
   value: Date;
   pt: any;
+  horariosDisponiveis: any[];
+  horario: string = "off";
 
   selected: Date | null;
 
@@ -31,6 +33,13 @@ export class HomePage implements OnInit {
   constructor(private authService: AuthService,
               private afs: AngularFirestore,
               private config: PrimeNGConfig) {
+    this.horariosDisponiveis = [{label: '08:30', value: '08:30'},
+                         {label: '09:00', value: '09:00'},
+                         {label: '09:30', value: '09:30'},
+                         {label: '10:00', value: '10:00'},
+                         {label: '10:30', value: '10:30'},
+                         {label: '11:00', value: '11:00'}
+                        ];
   }
 
   onChange($event) {

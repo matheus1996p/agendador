@@ -135,6 +135,39 @@ mat-button-toggle {
   font-family: "Arial Black";
 }
 
+::ng-deep {
+
+  .p-button {
+    color: #ffffff !important;
+    background: #004e39 !important;
+    font-family: "Arial Black" !important;
+    font-weight: bold !important;
+    margin: 3px !important;
+    border: 0 none !important;
+
+  }
+
+  .p-selectbutton .p-button.p-highlight {
+    background: #ffffff !important;
+    color: #004e39 !important;
+    font-family: "Arial Black" !important;
+    font-weight: bold !important;
+  }
+
+  .p-selectbutton .p-button.p-highlight:hover {
+    background: #ffffff !important;
+    color: #004e39 !important;
+    font-family: "Arial Black" !important;
+    font-weight: bold !important;
+  }
+
+  .p-button p-component p-ripple ng-star-inserted{
+    background: #004e39;
+    color: #ffffff;
+  }
+}
+
+
 
 
 
