@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {CalendarComponent, NgCalendarModule} from "ionic2-calendar";
 import {AngularFirestore} from "@angular/fire/firestore";
@@ -24,13 +24,13 @@ export class HomePage implements OnInit {
 
   constructor(private authService: AuthService,
               private afs: AngularFirestore) {
-   this.getUsuarioLogado();
   }
 
   onChange($event) {
     console.log($event);
   }
   ngOnInit() {
+    this.getUsuarioLogado();
   }
 
   next(){
@@ -88,7 +88,7 @@ export class HomePage implements OnInit {
 
   async getUsuarioLogado() {
     const user = await this.authService.getAuth().currentUser;
-    await this.afs.collection('Users').doc(user.uid).
+    await this.afs.collection('Usuarios').doc(user.uid).
     valueChanges().subscribe(data => {
       this.usuarioLogado = data;
       console.log(this.usuarioLogado);

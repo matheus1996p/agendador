@@ -4,4 +4,5 @@ export interface User {
   placa?: string;
   email?: string;
   senha?: string;
+  sincronizado?: boolean;
 }

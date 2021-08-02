@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
       const user = await this.authService.register(this.userRegister);
       const newUser = Object.assign({}, this.userRegister);
       delete newUser.senha;
-      await this.afs.collection('Users').doc(user.user.uid).set(newUser);
+      await this.afs.collection('Usuarios').doc(user.user.uid).set(newUser);
     } catch (error) {
       let message: string;
       switch (error.code) {

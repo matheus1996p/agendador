@@ -106,7 +106,7 @@ export class CadastroPage implements OnInit {
   async getUsuarioLogado() {
     const user = await this.authService.getAuth().currentUser;
 
-    await this.afs.collection('Users').doc(user.uid).
+    await this.afs.collection('Usuarios').doc(user.uid).
     valueChanges().subscribe(data => {
       this.usuarioLogado = data;
       this.usuarioLogado.senha = '123456';

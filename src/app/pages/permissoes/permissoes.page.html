@@ -1,9 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>permissoes</ion-title>
+    <ion-icon routerLink="/home" style="margin-left: 2%" slot="start" size="large" name="arrow-back-outline"></ion-icon>
+    <ion-title align="center">Permissões</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="tela">
+  <div class="body">
+
+    <ion-list>
+      <ion-item *ngFor="let usuario of usuarios">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-label style="margin-left: 5%">{{usuario.usuario}}</ion-label>
+      </ion-item>
+    </ion-list>
+
+  </div>
 
 </ion-content>
