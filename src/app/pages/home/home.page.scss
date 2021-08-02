@@ -22,7 +22,10 @@
   width: 100%;
   height: 40vh;
   top: 35%;
-
+  //position: fixed;
+  //width: 100%;
+  //height: 205px;
+  //top: 35%;
   color: #ffffff;
   font-size: 18px;
 
@@ -55,8 +58,21 @@ calendar {
   color: #333 !important;
 }
 
-//.dayOff{
-//  border-top: #f53d3d;
-//  border-bottom-width: thin;
-//  border-top-style: solid;
-//}
+
+.demo-inline-calendar-card {
+  width: 100%;
+}
+
+::ng-deep .mat-calendar-header{
+  background-color: #1f5436;
+  color: #ffffff;
+}
+
+.horarios {
+  margin-top: 2%;
+
+  h2 {
+    color: #ffffff;
+  }
+
+}

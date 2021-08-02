@@ -10,6 +10,11 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import {NgCalendarModule} from "ionic2-calendar";
 import {CalModalPageModule} from "../cal-modal/cal-modal.module";
+import {MatCardModule} from "@angular/material/card";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 registerLocaleData(localept, 'pt');
 
 @NgModule({
@@ -19,9 +24,14 @@ registerLocaleData(localept, 'pt');
     IonicModule,
     HomePageRoutingModule,
     NgCalendarModule,
-    CalModalPageModule
+    CalModalPageModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   declarations: [HomePage],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt' }]
+  providers: [{ provide: LOCALE_ID, useValue: 'pt' },{provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}]
 })
 export class HomePageModule {}

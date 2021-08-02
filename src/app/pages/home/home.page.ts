@@ -19,6 +19,8 @@ export class HomePage implements OnInit {
     currentDate: new Date()
   };
 
+  selected: Date | null;
+
 
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
