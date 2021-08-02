@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { PermissoesPageRoutingModule } from './permissoes-routing.module';
 
 import { PermissoesPage } from './permissoes.page';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PermissoesPageRoutingModule
+    PermissoesPageRoutingModule,
+    MatExpansionModule,
+    MatButtonModule
   ],
   declarations: [PermissoesPage]
 })

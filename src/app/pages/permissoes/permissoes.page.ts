@@ -13,8 +13,9 @@ import {ApiService} from "../../services/api.service";
 export class PermissoesPage implements OnInit {
 
   public usuarioLogado: User = {};
-  public usuarioSincronizado = false;
   public usuarios = new Array<User>();
+
+  public step: number;
 
   constructor(private authService: AuthService,
               private loadingCtrl: LoadingController,
@@ -29,6 +30,20 @@ export class PermissoesPage implements OnInit {
 
   ngOnInit() {
   }
+
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
 
   async getUsuarioLogado() {
     const user = await this.authService.getAuth().currentUser;

@@ -8,12 +8,27 @@
 <ion-content id="tela">
   <div class="body">
 
-    <ion-list>
-      <ion-item *ngFor="let usuario of usuarios">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <ion-label style="margin-left: 5%">{{usuario.usuario}}</ion-label>
-      </ion-item>
-    </ion-list>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let usuario of usuarios; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{usuario.usuario}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        teste
+        <mat-action-row>
+          <button *ngIf="i > 0" mat-button color="warn" (click)="prevStep()">Anterior</button>
+          <button mat-button color="primary" (click)="nextStep()">Próximo</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+<!--    <ion-list>-->
+<!--      <ion-item *ngFor="let usuario of usuarios">-->
+<!--        <ion-icon name="person-circle-outline"></ion-icon>-->
+<!--        <ion-label style="margin-left: 5%">{{usuario.usuario}}</ion-label>-->
+<!--      </ion-item>-->
+<!--    </ion-list>-->
 
   </div>
 
