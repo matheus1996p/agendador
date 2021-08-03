@@ -58,12 +58,12 @@
 
   <div align="center" style="margin-top: 5%" class="ion-padding">
 
-    <p-calendar  [style]="{'width':'100%'}" [locale]="pt" [(ngModel)]="value" dateFormat="dd/mm/yy" [inline]="true" >
+    <p-calendar (onSelect)="onSelect($event)" [style]="{'width':'100%'}" [locale]="pt" [(ngModel)]="value" dateFormat="dd/mm/yy" [inline]="true" >
 
     </p-calendar>
 
     <div align="center" class="horarios">
-      <h2>HORÁRIOS DISPONÍVEIS <ion-icon style="margin-left: 1%; padding-top: 3%" name="settings-sharp"></ion-icon></h2>
+      <h2>HORÁRIOS DISPONÍVEIS <ion-icon (click)="display=true" style="margin-left: 1%; padding-top: 3%" name="settings-sharp"></ion-icon></h2>
     </div>
 
     <p-selectButton [style]="{'margin':'10px'}" [options]="horariosDisponiveis" [(ngModel)]="horario" optionLabel="label" optionValue="value"></p-selectButton>
@@ -71,3 +71,85 @@
   </div>
 
 </ion-content>
+
+<p-dialog header="Defina o período de expediente" [(visible)]="display">
+  <form class="example-form">
+    <p>Horários</p>
+    <ion-row>
+      <ion-col size="6">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Hora Inicial:</mat-label>
+          <input matInput placeholder="Ex. 07:45">
+        </mat-form-field>
+      </ion-col>
+      <ion-col size="6">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Hora Final:</mat-label>
+          <input matInput placeholder="Ex. 18:00">
+        </mat-form-field>
+      </ion-col>
+      <ion-col size="12">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Intervalo entre horários (Em minutos):</mat-label>
+          <input matInput placeholder="Ex. 30">
+        </mat-form-field>
+      </ion-col>
+      <ion-col size="12">
+        <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>Bloquear Horários:</mat-label>
+          <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip *ngFor="let horario of horariosBloqueados" [selectable]="selectable"
+                      [removable]="removable" (removed)="remove(horario)">
+              {{horario.horario}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Ex. 12:00"
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+      </ion-col>
+      <p>Dias da semana</p>
+      <ion-col size="12">
+        <ion-list>
+          <ion-item>
+            <ion-label>Domingo</ion-label>
+            <ion-checkbox slot="end" value="pepperoni"></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Segunda</ion-label>
+            <ion-checkbox slot="end" value="sausage"></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Terça</ion-label>
+            <ion-checkbox slot="end" value="mushrooms"></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Quarta</ion-label>
+            <ion-checkbox slot="end" value="mushrooms"></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Quinta</ion-label>
+            <ion-checkbox slot="end" value="mushrooms"></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Sexta</ion-label>
+            <ion-checkbox slot="end" value="mushrooms"></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Sábado</ion-label>
+            <ion-checkbox slot="end" value="mushrooms"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </form>
+</p-dialog>

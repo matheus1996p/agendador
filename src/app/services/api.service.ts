@@ -12,6 +12,9 @@ export class ApiService {
 
   }
 
+  getHorarios(){
+  }
+
 
   getNotas(){
     return this.http.get(`${environment.apiUrl}/notasFiscais`);

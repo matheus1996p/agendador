@@ -4,6 +4,12 @@ import {CalendarComponent, NgCalendarModule} from "ionic2-calendar";
 import {AngularFirestore} from "@angular/fire/firestore";
 import {User} from "../../interfaces/user";
 import {PrimeNGConfig} from "primeng/api";
+import {MatChipInputEvent} from "@angular/material/chips";
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+
+export interface Horario {
+  horario: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -11,22 +17,28 @@ import {PrimeNGConfig} from "primeng/api";
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  eventSource = [];
+
   public usuarioLogado: User = {};
-  viewTitle: string;
   calendar = {
     mode: 'month',
     color: 'primary',
     currentDate: new Date()
   };
-
+  val: string;
   value: Date;
   pt: any;
+  horariosBloqueados = new Array<Horario>();
   horariosDisponiveis: any[];
   horario: string = "off";
+  display: boolean = true;
 
-  selected: Date | null;
 
+// Variaveis do input Material
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+//
 
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
@@ -42,9 +54,6 @@ export class HomePage implements OnInit {
                         ];
   }
 
-  onChange($event) {
-    console.log($event);
-  }
   ngOnInit() {
     this.config.setTranslation({
       accept: 'Aceitar',
@@ -65,54 +74,35 @@ export class HomePage implements OnInit {
     this.myCal.slideNext();
   }
 
-  back(){
-    this.myCal.slidePrev();
+  onSelect(data){
+    console.log(data.toLocaleDateString('pt-BR'));
+
   }
 
-  onViewTitleChanged(title) {
-    this.viewTitle = title;
+  showDialog() {
+    this.display = true;
   }
 
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
 
-  createRandomEvents() {
-    var events = [];
-    for (var i = 0; i < 50; i += 1) {
-      var date = new Date();
-      var eventType = Math.floor(Math.random() * 2);
-      var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
-      var startTime;
-      var endTime;
-      if (eventType === 0) {
-        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-        if (endDay === startDay) {
-          endDay += 1;
-        }
-        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-        events.push({
-          title: 'All Day - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: true
-        });
-      } else {
-        var startMinute = Math.floor(Math.random() * 24 * 60);
-        var endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-        events.push({
-          title: 'Event - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: false
-        });
-      }
+    // Add our fruit
+    if (value) {
+      this.horariosBloqueados.push({horario: value});
     }
-    this.eventSource = events;
+
+    // Clear the input value
+    event.chipInput!.clear();
   }
-  removeEvents(){
-    this.eventSource = [];
+
+  remove(horario): void {
+    const index = this.horariosBloqueados.indexOf(horario);
+
+    if (index >= 0) {
+      this.horariosBloqueados.splice(index, 1);
+    }
   }
+
 
   async getUsuarioLogado() {
     const user = await this.authService.getAuth().currentUser;
