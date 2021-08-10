@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
   horariosBloqueados = new Array<Horario>();
   horariosDisponiveis: any[];
   horario: string = "off";
-  display: boolean = true;
+  display: boolean = false;
 
 
 // Variaveis do input Material
