@@ -1,6 +1,6 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {CommonModule, registerLocaleData} from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import localept from '@angular/common/locales/pt';
 
 import { IonicModule } from '@ionic/angular';
@@ -44,7 +44,9 @@ registerLocaleData(localept, 'pt');
     DialogModule,
     MatInputModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [HomePage],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' },{provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}]

@@ -6,9 +6,18 @@ import {User} from "../../interfaces/user";
 import {PrimeNGConfig} from "primeng/api";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 export interface Horario {
   horario: string;
+}
+
+export interface Conf {
+  horaInicial: string;
+  horaFinal: string;
+  intervalo: number;
+  bloqueados: Array<Horario>;
+  dias: [];
 }
 
 @Component({
@@ -25,9 +34,14 @@ export class HomePage implements OnInit {
     currentDate: new Date()
   };
   val: string;
+
+  horaInicialControl = new FormControl();
+  horaFinalControl = new FormControl();
+  intervaloControl = new FormControl();
+
   value: Date;
   pt: any;
-  horariosBloqueados = new Array<Horario>();
+  conf: FormGroup;
   horariosDisponiveis: any[];
   horario: string = "off";
   display: boolean = false;
@@ -44,7 +58,22 @@ export class HomePage implements OnInit {
 
   constructor(private authService: AuthService,
               private afs: AngularFirestore,
-              private config: PrimeNGConfig) {
+              private config: PrimeNGConfig,
+              private fb: FormBuilder) {
+    this.conf = fb.group({
+      horaInicial: this.horaInicialControl,
+      horaFinal: this.horaFinalControl,
+      intervalo: this.intervaloControl,
+      bloqueados: new FormControl([]),
+      domingo: new FormControl(false),
+      segunda: new FormControl(false),
+      terca: new FormControl(false),
+      quarta: new FormControl(false),
+      quinta: new FormControl(false),
+      sexta: new FormControl(false),
+      sabado: new FormControl(false),
+    });
+
     this.horariosDisponiveis = [{label: '08:30', value: '08:30'},
                          {label: '09:00', value: '09:00'},
                          {label: '09:30', value: '09:30'},
@@ -83,23 +112,26 @@ export class HomePage implements OnInit {
     this.display = true;
   }
 
+  salvarConf(conf){
+    console.log(conf);
+  }
+
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
     if (value) {
-      this.horariosBloqueados.push({horario: value});
+      this.bloqueados.value.push({horario: value});
+
     }
 
-    // Clear the input value
     event.chipInput!.clear();
   }
 
   remove(horario): void {
-    const index = this.horariosBloqueados.indexOf(horario);
+    const index = this.bloqueados.value.indexOf(horario);
 
     if (index >= 0) {
-      this.horariosBloqueados.splice(index, 1);
+      this.bloqueados.value.splice(index, 1);
     }
   }
 
@@ -120,4 +152,12 @@ export class HomePage implements OnInit {
       console.error(e);
     }
   }
+  get bloqueados() {
+    return this.conf.get('bloqueados');
+  }
+
+  get dias() {
+    return this.conf.get('dias');
+  }
+
 }
