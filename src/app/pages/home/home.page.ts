@@ -7,6 +7,8 @@ import {PrimeNGConfig} from "primeng/api";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {ApiService} from "../../services/api.service";
+import {LoadingController, ToastController} from "@ionic/angular";
 
 export interface Horario {
   horario: string;
@@ -46,7 +48,6 @@ export class HomePage implements OnInit {
   horario: string = "off";
   display: boolean = false;
 
-
 // Variaveis do input Material
   selectable = true;
   removable = true;
@@ -56,10 +57,15 @@ export class HomePage implements OnInit {
 
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
+  private loading: any;
+
   constructor(private authService: AuthService,
               private afs: AngularFirestore,
               private config: PrimeNGConfig,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private apiService: ApiService,
+              private toastCtrl: ToastController,
+              private loadingCtrl: LoadingController) {
     this.conf = fb.group({
       horaInicial: this.horaInicialControl,
       horaFinal: this.horaFinalControl,
@@ -113,7 +119,32 @@ export class HomePage implements OnInit {
   }
 
   salvarConf(conf){
-    console.log(conf);
+    let bloqueados = '';
+    if(conf.bloqueados.length > 0){
+      for(let i = 0; i < conf.bloqueados.length; i++){
+          if(i === 0){
+            bloqueados = bloqueados.concat(conf.bloqueados[i].horario);
+          } else {
+            bloqueados = bloqueados.concat(', ' + conf.bloqueados[i].horario);
+          }
+      }
+    }
+    const horaFinal = conf.horaFinal;
+    const horaInicial = conf.horaInicial;
+    const intervalo = parseInt(conf.intervalo);
+    const domingo = conf.domingo ? 1 : 0;
+    const segunda = conf.segunda ? 1 : 0;
+    const terca = conf.terca ? 1 : 0;
+    const quarta = conf.quarta ? 1 : 0;
+    const quinta = conf.quinta ? 1 : 0;
+    const sexta = conf.sexta ? 1 : 0;
+    const sabado = conf.sabado ? 1 : 0;
+
+    this.apiService.setConfAgendamento(bloqueados, horaInicial, horaFinal, intervalo, domingo, segunda, terca, quarta, quinta, sexta, sabado).subscribe( data => {
+      console.log('Configuração Salva');
+      this.display = false;
+    });
+
   }
 
   add(event: MatChipInputEvent): void {
@@ -152,6 +183,23 @@ export class HomePage implements OnInit {
       console.error(e);
     }
   }
+
+  async presentLoading() {
+    this.loading = await this.loadingCtrl.create({
+      message: 'Por favor, aguarde...'
+    });
+    return this.loading.present();
+
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   get bloqueados() {
     return this.conf.get('bloqueados');
   }

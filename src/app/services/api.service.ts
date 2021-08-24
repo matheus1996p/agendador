@@ -26,6 +26,24 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/contamov?${params.toString()}`);
   }
 
+  setConfAgendamento(bloqueados, horainicial, horafinal, intervalo, domingo, segunda, terca, quarta, quinta, sexta, sabado){
+    const id = 1;
+    const params = new HttpParams()
+      .set('id', id)
+      .set('bloqueados', bloqueados)
+      .set('horainicial', horainicial)
+      .set('horafinal', horafinal)
+      .set('intervalo', intervalo)
+      .set('domingo', domingo)
+      .set('segunda', segunda)
+      .set('terca', terca)
+      .set('quarta', quarta)
+      .set('quinta', quinta)
+      .set('sexta', sexta)
+      .set('sabado', sabado);
+    return this.http.post(`${environment.apiUrl}/confAgendamento`, params);
+  }
+
   updateData(){
 
   }
