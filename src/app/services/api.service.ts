@@ -26,6 +26,10 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/contamov?${params.toString()}`);
   }
 
+  getConfAgendamento(){
+    return this.http.get(`${environment.apiUrl}/confAgendamento`);
+  }
+
   setConfAgendamento(bloqueados, horainicial, horafinal, intervalo, domingo, segunda, terca, quarta, quinta, sexta, sabado){
     const id = 1;
     const params = new HttpParams()

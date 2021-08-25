@@ -66,7 +66,14 @@ export class HomePage implements OnInit {
               private apiService: ApiService,
               private toastCtrl: ToastController,
               private loadingCtrl: LoadingController) {
-    this.conf = fb.group({
+
+    this.carregaConf();
+
+  }
+
+  carregaConf(){
+
+    this.conf = this.fb.group({
       horaInicial: this.horaInicialControl,
       horaFinal: this.horaFinalControl,
       intervalo: this.intervaloControl,
@@ -80,13 +87,63 @@ export class HomePage implements OnInit {
       sabado: new FormControl(false),
     });
 
-    this.horariosDisponiveis = [{label: '08:30', value: '08:30'},
-                         {label: '09:00', value: '09:00'},
-                         {label: '09:30', value: '09:30'},
-                         {label: '10:00', value: '10:00'},
-                         {label: '10:30', value: '10:30'},
-                         {label: '11:00', value: '11:00'}
-                        ];
+    this.apiService.getConfAgendamento().subscribe(conf =>{
+      this.conf.controls['horaInicial'].setValue(conf[0].horainicial);
+      this.conf.controls['bloqueados'].setValue(conf[0].bloqueados.split(', '));
+      this.conf.controls['horaFinal'].setValue(conf[0].horafinal);
+      this.conf.controls['intervalo'].setValue(conf[0].intervalo);
+      this.conf.controls['domingo'].setValue(conf[0].domingo === 1 ? true : false);
+      this.conf.controls['segunda'].setValue(conf[0].segunda === 1 ? true : false);
+      this.conf.controls['terca'].setValue(conf[0].terca === 1 ? true : false);
+      this.conf.controls['quarta'].setValue(conf[0].quarta === 1 ? true : false);
+      this.conf.controls['quinta'].setValue(conf[0].quinta === 1 ? true : false);
+      this.conf.controls['sexta'].setValue(conf[0].sexta === 1 ? true : false);
+      this.conf.controls['sabado'].setValue(conf[0].sabado === 1 ? true : false);
+
+      this.carregaHorarios();
+
+    });
+  }
+
+  addMinutes(time, minsToAdd) {
+    function D(J){
+      return (J<10? '0':'') + J;
+    };
+    let piece = time.split(':');
+    let mins = piece[0]*60 + +piece[1] + +minsToAdd;
+
+    return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);
+  }
+
+  compararHora(hora1, hora2)
+  {
+    hora1 = hora1.split(":");
+    hora2 = hora2.split(":");
+
+    let d = new Date();
+    let data1 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora1[0], hora1[1]);
+    let data2 = new Date(d.getFullYear(), d.getMonth(), d.getDate(), hora2[0], hora2[1]);
+
+    return data1 > data2;
+  };
+
+
+  carregaHorarios(){
+
+    let horario = this.conf.controls['horaInicial'].value;
+    let horarios = [];
+    console.log(this.conf.controls['horaInicial'].value);
+    while (this.compararHora(this.conf.controls['horaFinal'].value, horario)) {
+      let horarioDisponivel = {label: '', value: ''};
+      horario  = this.addMinutes(horario + ':00', this.conf.controls['intervalo'].value);
+      if(this.compararHora(this.conf.controls['horaFinal'].value, horario)){
+        horarioDisponivel.label = horario;
+        horarioDisponivel.value = horario;
+        horarios.push(horarioDisponivel);
+      }
+    }
+
+    this.horariosDisponiveis = horarios;
   }
 
   ngOnInit() {
@@ -151,8 +208,7 @@ export class HomePage implements OnInit {
     const value = (event.value || '').trim();
 
     if (value) {
-      this.bloqueados.value.push({horario: value});
-
+      this.bloqueados.value.push(value);
     }
 
     event.chipInput!.clear();
