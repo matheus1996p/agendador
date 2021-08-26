@@ -41,7 +41,7 @@ export class HomePage implements OnInit {
   horaFinalControl = new FormControl();
   intervaloControl = new FormControl();
 
-  value: Date;
+  value = new Date();
   pt: any;
   conf: FormGroup;
   horariosDisponiveis: any[];
@@ -71,7 +71,7 @@ export class HomePage implements OnInit {
 
   }
 
-  carregaConf(){
+  async carregaConf(){
 
     this.conf = this.fb.group({
       horaInicial: this.horaInicialControl,
@@ -87,7 +87,7 @@ export class HomePage implements OnInit {
       sabado: new FormControl(false),
     });
 
-    this.apiService.getConfAgendamento().subscribe(conf =>{
+    await this.apiService.getConfAgendamento().subscribe(conf =>{
       this.conf.controls['horaInicial'].setValue(conf[0].horainicial);
       this.conf.controls['bloqueados'].setValue(conf[0].bloqueados.split(', '));
       this.conf.controls['horaFinal'].setValue(conf[0].horafinal);
@@ -173,6 +173,15 @@ export class HomePage implements OnInit {
 
   showDialog() {
     this.display = true;
+  }
+
+  async salvarAgendamento(horario, data) {
+     console.log(horario, data);
+     console.log(this.usuarioLogado);
+
+    await this.apiService.setMarcarHorario(this.usuarioLogado.cpf, this.usuarioLogado.placa, horario, data).subscribe( data => {
+      console.log('horario Salvo');
+    });
   }
 
   salvarConf(conf){

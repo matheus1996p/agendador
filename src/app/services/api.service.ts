@@ -48,6 +48,15 @@ export class ApiService {
     return this.http.post(`${environment.apiUrl}/confAgendamento`, params);
   }
 
+  setMarcarHorario(cpf, placa, horario, data){
+    const params = new HttpParams()
+      .set('cpf', cpf)
+      .set('placa', placa)
+      .set('horario', horario)
+      .set('data', data);
+    return this.http.post(`${environment.apiUrl}/marcarHorario`, params);
+  }
+
   updateData(){
 
   }

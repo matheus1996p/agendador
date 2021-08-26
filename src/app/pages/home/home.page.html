@@ -70,6 +70,10 @@
 
   </div>
 
+  <div *ngIf="horario != 'off'" align="center" style="margin-bottom: 2%">
+    <ion-button style="width: 90%;" color="light" (click)="salvarAgendamento(horario, value)"><span style="color: #1f5436; font-weight: bold">Enviar</span></ion-button>
+  </div>
+
 </ion-content>
 
 <p-dialog header="Defina o período de expediente" [(visible)]="display">
