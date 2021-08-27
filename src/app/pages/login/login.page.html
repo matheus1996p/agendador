@@ -43,7 +43,7 @@
         </ion-item>
 
         <ion-item class="ion-margin-top" lines="none">
-          <ion-input type="text" placeholder="CPF" [(ngModel)]="userRegister.cpf"></ion-input>
+          <ion-input type="text" [dropSpecialCharacters]="false" maxlength="14" mask="000.000.000-00" placeholder="CPF" [(ngModel)]="userRegister.cpf"></ion-input>
         </ion-item>
 
         <ion-item class="ion-margin-top" lines="none">

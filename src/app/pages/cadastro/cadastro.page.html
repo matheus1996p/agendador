@@ -14,7 +14,7 @@
 
     <ion-item>
       <ion-label position="floating">CPF</ion-label>
-      <ion-input type="text" [(ngModel)]="usuarioLogado.cpf"></ion-input>
+      <ion-input maxlength="14"  [dropSpecialCharacters]="true" mask="000.000.000-00" type="text" [(ngModel)]="usuarioLogado.cpf"></ion-input>
     </ion-item>
 
     <ion-item>
