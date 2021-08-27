@@ -30,6 +30,12 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/confAgendamento`);
   }
 
+  getDiasDisponiveis(data){
+    const params = new HttpParams()
+      .set('data', data);
+    return this.http.get(`${environment.apiUrl}/marcarHorario?${params.toString()}`);
+  }
+
   setConfAgendamento(bloqueados, horainicial, horafinal, intervalo, domingo, segunda, terca, quarta, quinta, sexta, sabado){
     const id = 1;
     const params = new HttpParams()

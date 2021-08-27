@@ -128,22 +128,30 @@ export class HomePage implements OnInit {
   };
 
 
-  carregaHorarios(){
-
-    let horario = this.conf.controls['horaInicial'].value;
-    let horarios = [];
-    console.log(this.conf.controls['horaInicial'].value);
-    while (this.compararHora(this.conf.controls['horaFinal'].value, horario)) {
-      let horarioDisponivel = {label: '', value: ''};
-      horario  = this.addMinutes(horario + ':00', this.conf.controls['intervalo'].value);
-      if(this.compararHora(this.conf.controls['horaFinal'].value, horario)){
-        horarioDisponivel.label = horario;
-        horarioDisponivel.value = horario;
-        horarios.push(horarioDisponivel);
+  async carregaHorarios(){
+    await this.apiService.getDiasDisponiveis(this.value).subscribe((data: any[]) =>{
+      let horario = this.conf.controls['horaInicial'].value;
+      let horarios = [];
+      console.log(data.length);
+      console.log(this.conf.controls['horaInicial'].value);
+      while (this.compararHora(this.conf.controls['horaFinal'].value, horario)) {
+        let horarioDisponivel = {label: '', value: ''};
+        horario  = this.addMinutes(horario + ':00', this.conf.controls['intervalo'].value);
+        if(this.compararHora(this.conf.controls['horaFinal'].value, horario)){
+          horarioDisponivel.label = horario;
+          horarioDisponivel.value = horario;
+          horarios.push(horarioDisponivel);
+        }
       }
-    }
-
-    this.horariosDisponiveis = horarios;
+      this.horariosDisponiveis = horarios;
+      for(let j = 0; j < this.horariosDisponiveis.length; j++){
+        for(let i = 0; i < data.length; i++){
+          if(this.horariosDisponiveis[j].value == data[i].horario){
+            this.horariosDisponiveis.splice(j, 1);
+          }
+        }
+      }
+    });
   }
 
   ngOnInit() {
@@ -168,7 +176,7 @@ export class HomePage implements OnInit {
 
   onSelect(data){
     console.log(data.toLocaleDateString('pt-BR'));
-
+    this.carregaHorarios();
   }
 
   showDialog() {
