@@ -42,6 +42,12 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/marcarHorario?${params.toString()}`);
   }
 
+  getDetalhesPedidos(pedidos){
+    const params = new HttpParams()
+      .set('pedidos', pedidos);
+    return this.http.get(`${environment.apiUrl}/listaPedidos/detalhes?${params.toString()}`);
+  }
+
   setConfAgendamento(bloqueados, horainicial, horafinal, intervalo, domingo, segunda, terca, quarta, quinta, sexta, sabado){
     const id = 1;
     const params = new HttpParams()

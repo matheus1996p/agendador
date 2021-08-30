@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -12,6 +12,10 @@ import {TagModule} from "primeng/tag";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {TableModule} from "primeng/table";
+import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {AccordionModule} from "primeng/accordion";
+import {ScrollPanelModule} from "primeng/scrollpanel";
 
 @NgModule({
   imports: [
@@ -23,8 +27,12 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     TagModule,
     MatExpansionModule,
     MatButtonModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    TableModule,
+    AccordionModule,
+    ScrollPanelModule
   ],
-  declarations: [EntregasPage]
+  declarations: [EntregasPage],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt' },{provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}]
 })
 export class EntregasPageModule {}
