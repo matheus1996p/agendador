@@ -30,35 +30,76 @@ export class EntregasPage implements OnInit {
 
 
   async carregaPedidos(){
-    await this.apiService.getDiasDisponiveis(this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).subscribe((data: any[]) =>{
-      this.pedidos = data;
 
-      this.pedidos.sort(function (a,b) {
+    try{
+      await this.apiService.getDiasDisponiveis(this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).subscribe((data: any[]) =>{
+        this.pedidos = data;
+
+        this.pedidos.sort(function (a,b) {
           return a.horario < b.horario ? -1 : a.horario > b.horario ? 1 : 0;
-      });
+        });
 
-      let numero = '';
-      if(this.pedidos.length > 0){
-        for(let i = 0; i < this.pedidos.length; i++){
-          if(i === 0){
-            numero = numero.concat(this.pedidos[i].pedido);
-          } else {
-            numero = numero.concat(', ' + this.pedidos[i].pedido);
+        let numero = '';
+        if(this.pedidos.length > 0){
+          for(let i = 0; i < this.pedidos.length; i++){
+            if(i === 0){
+              numero = numero.concat(this.pedidos[i].pedido);
+            } else {
+              numero = numero.concat(', ' + this.pedidos[i].pedido);
+            }
           }
         }
-      }
-       this.detalhesPedidos(numero);
-    });
+        this.detalhesPedidos(numero);
+      });
+    } catch (e) {
+      console.log(e);
+    } finally {
+
+    }
+
+
   }
 
-  async detalhesPedidos(numero){
-    this.apiService.getDetalhesPedidos(numero).subscribe((lista: any[]) => {
-      this.listaPedidosDetalhes = lista;
-    });
+   async detalhesPedidos(numero){
+    try {
+      await this.apiService.getDetalhesPedidos(numero).subscribe((lista: any[]) => {
+        this.listaPedidosDetalhes = lista;
+      });
+    } catch (e) {
+      console.log(e)
+    } finally {
+
+    }
+
   }
 
   onSelect(ev){
+    this.step = -1;
     this.carregaPedidos();
+  }
+
+  async atualizaStatus(status, pedido){
+    if(status === 1){
+      try{
+        await this.apiService.updateHorario(status, pedido.id).subscribe( result =>{
+          if(result){
+            this.carregaPedidos();
+          }
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      try {
+        await this.apiService.deleteHorario(pedido.id, this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).subscribe(result =>{
+          console.log('horario deletado!!');
+          this.carregaPedidos();
+        });
+      } catch (e) {
+        console.log(e);
+      }
+
+    }
   }
 
   compararHora(hora1, hora2)

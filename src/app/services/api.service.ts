@@ -42,6 +42,21 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/marcarHorario?${params.toString()}`);
   }
 
+  deleteHorario(id, data){
+    const params = new HttpParams()
+      .set('id', id)
+      .set('data', data);
+    return this.http.get(`${environment.apiUrl}/marcarHorario/delete?${params.toString()}`);
+  }
+
+
+  updateHorario(status, id){
+    const params = new HttpParams()
+      .set('status', status)
+      .set('id', id);
+    return this.http.post(`${environment.apiUrl}/marcarHorario/atualiza`, params);
+  }
+
   getDetalhesPedidos(pedidos){
     const params = new HttpParams()
       .set('pedidos', pedidos);

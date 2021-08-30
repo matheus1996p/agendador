@@ -37,7 +37,7 @@
           <mat-panel-title>
             <span *ngIf="pedido.status === 0 && !compararHora(horaAtual, pedido.horario)" style="margin-right: 3%"><p-tag severity="warning"><ion-icon name="alarm"></ion-icon></p-tag></span>
             <span *ngIf="pedido.status === 1" style="margin-right: 3%"><p-tag severity="success"><ion-icon name="alarm"></ion-icon></p-tag></span>
-            <span *ngIf="compararHora(horaAtual, pedido.horario)" style="margin-right: 3%"><p-tag severity="danger" ><ion-icon name="alarm"></ion-icon></p-tag></span>
+            <span *ngIf="compararHora(horaAtual, pedido.horario) && pedido.status !== 1" style="margin-right: 3%"><p-tag severity="danger" ><ion-icon name="alarm"></ion-icon></p-tag></span>
             <span>Cliente: {{pedido.cpf}}</span>
             <span style="margin-left: 5%">Nro. Pedido: {{pedido.pedido}}</span>
             <span style="margin-left: 5%"><p-tag severity="info" value="{{pedido.horario}}"></p-tag></span>
@@ -64,6 +64,10 @@
 
           <span style="font-weight: bold; margin-top: 5%">Quantidade Total: </span><span>{{quantidadeTotal}}</span>
           <span style="font-weight: bold; margin-left: 3%">Valor Total: </span><span>{{valorTotal | currency:'BRL':true}}</span>
+        <div style="margin-top: 5%" align="center">
+          <ion-button *ngIf="pedido.status !== 1" size="small" color="success" (click)="atualizaStatus(1,pedido)"><ion-icon style="margin-right: 2%" name="checkmark-circle"></ion-icon>Retirado</ion-button>
+          <ion-button size="small" color="danger" (click)="atualizaStatus(2,pedido)"><ion-icon style="margin-right: 2%" name="close-circle"></ion-icon>Cancelado</ion-button>
+        </div>
           <mat-action-row>
           <button *ngIf="i > 0" mat-button color="warn" (click)="prevStep()">Anterior</button>
           <button mat-button color="primary" (click)="nextStep()">Próximo</button>
