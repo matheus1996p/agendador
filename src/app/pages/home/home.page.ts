@@ -9,9 +9,18 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ApiService} from "../../services/api.service";
 import {LoadingController, ToastController} from "@ionic/angular";
+import {Observable} from "rxjs";
+import {map, startWith} from "rxjs/operators";
 
 export interface Horario {
   horario: string;
+}
+
+export interface Pedido {
+  numero?: string;
+  dtemissao?: string;
+  dtvalidade?: string;
+  valormercadoria?: string;
 }
 
 export interface Conf {
@@ -35,11 +44,13 @@ export class HomePage implements OnInit {
     color: 'primary',
     currentDate: new Date()
   };
-  val: string;
 
   horaInicialControl = new FormControl();
   horaFinalControl = new FormControl();
   intervaloControl = new FormControl();
+
+  listaPedidos: any[];
+  pedidoSelecionado: Pedido = {};
 
   value = new Date();
   pt: any;
@@ -69,6 +80,16 @@ export class HomePage implements OnInit {
 
     this.carregaConf();
 
+  }
+
+  async carregaPedidos(){
+    try{
+      await this.apiService.getListaPedidos(this.usuarioLogado.placa).subscribe((pedidos: any[]) =>{
+        this.listaPedidos = pedidos;
+      })
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async carregaConf(){
@@ -129,7 +150,8 @@ export class HomePage implements OnInit {
 
 
   async carregaHorarios(){
-    await this.apiService.getDiasDisponiveis(this.value).subscribe((data: any[]) =>{
+
+    await this.apiService.getDiasDisponiveis(this.value.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).subscribe((data: any[]) =>{
       let horario = this.conf.controls['horaInicial'].value;
       let horarios = [];
       console.log(data.length);
@@ -155,6 +177,12 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+
+    // this.filteredOptions = this.listaPedidos.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value))
+    // );
+
     this.config.setTranslation({
       accept: 'Aceitar',
       reject: 'Cancelar',
@@ -186,8 +214,9 @@ export class HomePage implements OnInit {
   async salvarAgendamento(horario, data) {
      console.log(horario, data);
      console.log(this.usuarioLogado);
+     console.log(this.pedidoSelecionado)
 
-    await this.apiService.setMarcarHorario(this.usuarioLogado.cpf, this.usuarioLogado.placa, horario, data).subscribe( data => {
+    await this.apiService.setMarcarHorario(this.pedidoSelecionado.numero, this.usuarioLogado.cpf, this.usuarioLogado.placa, horario, data).subscribe( data => {
       console.log('horario Salvo');
     });
   }
@@ -245,7 +274,7 @@ export class HomePage implements OnInit {
     await this.afs.collection('Usuarios').doc(user.uid).
     valueChanges().subscribe(data => {
       this.usuarioLogado = data;
-      console.log(this.usuarioLogado);
+      this.carregaPedidos();
     });
   }
 

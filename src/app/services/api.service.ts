@@ -30,6 +30,12 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/confAgendamento`);
   }
 
+  getListaPedidos(placa){
+    const params = new HttpParams()
+      .set('placa', placa);
+    return this.http.get(`${environment.apiUrl}/listaPedidos?${params.toString()}`);
+  }
+
   getDiasDisponiveis(data){
     const params = new HttpParams()
       .set('data', data);
@@ -54,8 +60,9 @@ export class ApiService {
     return this.http.post(`${environment.apiUrl}/confAgendamento`, params);
   }
 
-  setMarcarHorario(cpf, placa, horario, data){
+  setMarcarHorario(pedido, cpf, placa, horario, data){
     const params = new HttpParams()
+      .set('pedido', pedido)
       .set('cpf', cpf)
       .set('placa', placa)
       .set('horario', horario)

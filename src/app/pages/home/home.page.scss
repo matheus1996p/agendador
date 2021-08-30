@@ -88,13 +88,18 @@ mat-button-toggle {
   font-style: bold;
 }
 
-::ng-deep .p-component, .p-component * {
+::ng-deep .p-calendar .p-component, .p-component * {
   /* box-sizing: border-box; */
   background-color: #225536;
   color: #ffffff;
   box-shadow: 0 0 0 0;
   border: 0 none;
   outline: 0;
+}
+
+::ng-deep .p-dropdown {
+  width: 90%;
+  text-align: left
 }
 
 ::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-next {

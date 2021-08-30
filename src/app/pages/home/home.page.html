@@ -62,6 +62,24 @@
 
     </p-calendar>
 
+    <div style="margin-top: 5%"  align="center" class="horarios">
+      <h2>SELECIONE O PEDIDO A RETIRAR</h2>
+
+      <p-dropdown  [options]="listaPedidos" [(ngModel)]="pedidoSelecionado" optionLabel="numero" [filter]="true" filterBy="numero" [showClear]="true" placeholder="Selecione um pedido">
+        <ng-template pTemplate="selectedItem">
+          <div  *ngIf="pedidoSelecionado">
+            <div>{{pedidoSelecionado.descricao}}</div>
+          </div>
+        </ng-template>
+        <ng-template let-pedido pTemplate="item">
+          <div class="country-item">
+            <div>{{pedido.descricao}}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
+
+    </div>
+
     <div align="center" class="horarios">
       <h2>HORÁRIOS DISPONÍVEIS <ion-icon (click)="showDialog()" style="margin-left: 1%; padding-top: 3%" name="settings-sharp"></ion-icon></h2>
     </div>
@@ -70,7 +88,7 @@
 
   </div>
 
-  <div *ngIf="horario != 'off'" align="center" style="margin-bottom: 2%">
+  <div *ngIf="horario != 'off' && pedidoSelecionado" align="center" style="margin-bottom: 2%">
     <ion-button style="width: 90%;" color="light" (click)="salvarAgendamento(horario, value)"><span style="color: #1f5436; font-weight: bold">Enviar</span></ion-button>
   </div>
 

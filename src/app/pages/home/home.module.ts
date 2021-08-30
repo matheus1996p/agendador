@@ -22,32 +22,36 @@ import {DialogModule} from "primeng/dialog";
 import {MatInputModule} from "@angular/material/input";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatIconModule} from "@angular/material/icon";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {DropdownModule} from "primeng/dropdown";
 
 registerLocaleData(localept, 'pt');
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule,
-    NgCalendarModule,
-    CalModalPageModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    MatButtonToggleModule,
-    CalendarModule,
-    SelectButtonModule,
-    DialogModule,
-    MatInputModule,
-    MatChipsModule,
-    MatIconModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        HomePageRoutingModule,
+        NgCalendarModule,
+        CalModalPageModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatNativeDateModule,
+        MatButtonToggleModule,
+        CalendarModule,
+        SelectButtonModule,
+        DialogModule,
+        MatInputModule,
+        MatChipsModule,
+        MatIconModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        DropdownModule
+    ],
   declarations: [HomePage],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' },{provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}]
 })
