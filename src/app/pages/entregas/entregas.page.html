@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon routerLink="/home" style="margin-left: 2%" slot="start" size="large" name="arrow-back-outline"></ion-icon>
+    <ion-title align="center">Lista de Entregas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="tela">
+  <div class="body">
+    <ion-row>
+      <ion-col size="12">
+          <label>Entregas do dia:</label>
+          <br>
+          <p-calendar (onSelect)="onSelect($event)" [(ngModel)]="date" dateFormat="dd/mm/yy" [showIcon]="true" inputId="icon"></p-calendar>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <p-scrollPanel [style]="{width: '100%', height: '400px'}" styleClass="custom">
+
+    <div class="legenda" align="center">
+      <ion-row>
+        <ion-col>
+          <span style="margin-left: 3%"><p-tag severity="warning" value="Aguardando"><ion-icon name="alarm"></ion-icon></p-tag></span>
+        </ion-col>
+        <ion-col>
+          <span style="margin-left: 3%"><p-tag severity="success" value="Retirado"><ion-icon name="checkmark-circle"></ion-icon></p-tag></span>
+        </ion-col>
+        <ion-col>
+          <span style="margin-left: 3%"><p-tag severity="danger" value="Atrasado"><ion-icon name="close-circle"></ion-icon></p-tag></span>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let pedido of pedidos; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span *ngIf="pedido.status === 0" style="margin-right: 3%"><p-tag severity="warning"><ion-icon name="alarm"></ion-icon></p-tag></span>
+            <span *ngIf="pedido.status === 1" style="margin-left: 3%"><p-tag severity="success" value="Retirado"></p-tag></span>
+            <span *ngIf="pedido.status === 2" style="margin-left: 3%"><p-tag severity="danger" value="Atrasado"></p-tag></span>
+            <span>Cliente: {{pedido.cpf}}</span>
+            <span style="margin-left: 5%">Nro. Pedido: {{pedido.pedido}}</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-slide-toggle>Administrador</mat-slide-toggle>
+        <mat-action-row>
+          <button *ngIf="i > 0" mat-button color="warn" (click)="prevStep()">Anterior</button>
+          <button mat-button color="primary" (click)="nextStep()">Próximo</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </p-scrollPanel>
+
+</ion-content>

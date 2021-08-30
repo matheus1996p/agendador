@@ -1,0 +1,45 @@
+.body {
+  margin-top: 30%;
+  //margin-left: 5%;
+}
+
+.footer{
+  margin-top: 15%;
+}
+
+#tela{
+  --background: #fff url('/assets/img/telas.jpeg') fixed center center / cover;
+  //background: url('/assets/img/telas.jpeg') ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+::ng-deep .body .p-calendar-w-btn .p-datepicker-trigger {
+  background-color: #0a6e37 !important;
+  border: none !important;
+}
+
+::ng-deep .p-calendar {
+  width: 100% !important;
+}
+
+::ng-deep .p-calendar-w-btn .p-inputtext {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 100% !important;
+}
+
+.botoes {
+  color: #ffffff;
+  background-color: #00883c;
+}
+
+.legenda {
+  margin: 5%;
+  padding-bottom: 2%;
+  padding-top: 2%;
+  background-color: #eeeeee;
+}

@@ -4,25 +4,27 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PermissoesPageRoutingModule } from './permissoes-routing.module';
+import { EntregasPageRoutingModule } from './entregas-routing.module';
 
-import { PermissoesPage } from './permissoes.page';
+import { EntregasPage } from './entregas.page';
+import {CalendarModule} from "primeng/calendar";
+import {TagModule} from "primeng/tag";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {ScrollPanelModule} from "primeng/scrollpanel";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PermissoesPageRoutingModule,
+    EntregasPageRoutingModule,
+    CalendarModule,
+    TagModule,
     MatExpansionModule,
     MatButtonModule,
-    MatSlideToggleModule,
-    ScrollPanelModule
+    MatSlideToggleModule
   ],
-  declarations: [PermissoesPage]
+  declarations: [EntregasPage]
 })
-export class PermissoesPageModule {}
+export class EntregasPageModule {}

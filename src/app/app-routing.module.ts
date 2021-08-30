@@ -38,6 +38,11 @@ const routes: Routes = [
     path: 'permissoes',
     loadChildren: () => import('./pages/permissoes/permissoes.module').then( m => m.PermissoesPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'entregas',
+    loadChildren: () => import('./pages/entregas/entregas.module').then( m => m.EntregasPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 
