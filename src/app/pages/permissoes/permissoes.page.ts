@@ -13,8 +13,7 @@ import {ApiService} from "../../services/api.service";
 export class PermissoesPage implements OnInit {
 
   public usuarioLogado: User = {};
-  public usuarios = new Array<User>();
-
+  public usuarios: any  = [];
   public step: number;
 
   constructor(private authService: AuthService,
@@ -23,14 +22,16 @@ export class PermissoesPage implements OnInit {
               private modalCtrl: ModalController,
               private apiService: ApiService,
               private toastCtrl: ToastController) {
-    this.listaUsuarios();
-    this.getUsuarioLogado();
-
   }
 
   ngOnInit() {
   }
 
+  ionViewWillEnter(){
+    this.usuarios = [];
+    this.listaUsuarios();
+    this.getUsuarioLogado();
+  }
 
   setStep(index: number) {
     this.step = index;
@@ -55,8 +56,9 @@ export class PermissoesPage implements OnInit {
     });
   }
 
-   listaUsuarios(){
-     this.afs.collection('Usuarios')
+   async listaUsuarios(){
+    console.log(this.usuarios);
+     await this.afs.collection('Usuarios')
       .valueChanges().subscribe(usuarios => {
         usuarios.forEach(pessoa =>{
           this.usuarios.push(pessoa);

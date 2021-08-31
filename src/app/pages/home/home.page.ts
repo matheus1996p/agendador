@@ -36,7 +36,7 @@ export interface Conf {
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
 
   public usuarioLogado: User = {};
   calendar = {
@@ -311,6 +311,14 @@ export class HomePage implements OnInit {
 
   get dias() {
     return this.conf.get('dias');
+  }
+
+  ionViewWillLeave() {
+    this.ngOnDestroy();
+  }
+
+  ngOnDestroy() {
+
   }
 
 }

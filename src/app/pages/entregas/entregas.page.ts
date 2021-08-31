@@ -25,6 +25,9 @@ export class EntregasPage implements OnInit {
 
   constructor(private config: PrimeNGConfig,
               private apiService: ApiService) {
+  }
+
+  ionViewWillEnter(){
     this.carregaPedidos();
   }
 
@@ -49,12 +52,12 @@ export class EntregasPage implements OnInit {
             }
           }
         }
-        this.detalhesPedidos(numero);
+        if(numero){
+          this.detalhesPedidos(numero);
+        }
       });
     } catch (e) {
       console.log(e);
-    } finally {
-
     }
 
 
@@ -62,9 +65,14 @@ export class EntregasPage implements OnInit {
 
    async detalhesPedidos(numero){
     try {
-      await this.apiService.getDetalhesPedidos(numero).subscribe((lista: any[]) => {
-        this.listaPedidosDetalhes = lista;
+
+      await this.apiService.getDetalhesPedidos(numero).then(data => {
+        this.listaPedidosDetalhes = data;
       });
+
+      // await this.apiService.getDetalhesPedidos(numero).subscribe((lista: any[]) => {
+      //   this.listaPedidosDetalhes = lista;
+      // });
     } catch (e) {
       console.log(e)
     } finally {

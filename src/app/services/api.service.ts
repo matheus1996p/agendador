@@ -57,10 +57,23 @@ export class ApiService {
     return this.http.post(`${environment.apiUrl}/marcarHorario/atualiza`, params);
   }
 
-  getDetalhesPedidos(pedidos){
+  // getDetalhesPedidos(pedidos){
+  //   const params = new HttpParams()
+  //     .set('pedidos', pedidos);
+  //   return this.http.get(`${environment.apiUrl}/listaPedidos/detalhes?${params.toString()}`);
+  // }
+
+  async getDetalhesPedidos(pedidos): Promise<any[]>{
+    const listaDados = [];
     const params = new HttpParams()
       .set('pedidos', pedidos);
-    return this.http.get(`${environment.apiUrl}/listaPedidos/detalhes?${params.toString()}`);
+    const dadosApi = await this.http.get<any[]>(`${environment.apiUrl}/listaPedidos/detalhes?${params.toString()}`).toPromise().then(dataApi=> {
+        dataApi.forEach(dado => {
+          listaDados.push(dado);
+        });
+      }
+    );
+    return listaDados;
   }
 
   setConfAgendamento(bloqueados, horainicial, horafinal, intervalo, domingo, segunda, terca, quarta, quinta, sexta, sabado){
