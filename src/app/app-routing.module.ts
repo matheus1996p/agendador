@@ -43,6 +43,11 @@ const routes: Routes = [
     path: 'entregas',
     loadChildren: () => import('./pages/entregas/entregas.module').then( m => m.EntregasPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'minha-agenda',
+    loadChildren: () => import('./pages/minha-agenda/minha-agenda.module').then( m => m.MinhaAgendaPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

@@ -42,6 +42,13 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/marcarHorario?${params.toString()}`);
   }
 
+  getMinhaAgenda(data, cpf){
+    const params = new HttpParams()
+      .set('cpf', cpf)
+      .set('data', data);
+    return this.http.get(`${environment.apiUrl}/marcarHorario/minhaAgenda?${params.toString()}`);
+  }
+
   deleteHorario(id, data){
     const params = new HttpParams()
       .set('id', id)

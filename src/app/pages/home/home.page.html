@@ -10,13 +10,17 @@
         <ion-icon name="person-circle-outline"></ion-icon>
         <ion-label style="margin-left: 5%">Meu cadastro</ion-label>
       </ion-item>
-      <ion-item routerLink="/permissoes">
+      <ion-item *ngIf="usuarioLogado.admin" routerLink="/permissoes">
         <ion-icon  name="settings-outline"></ion-icon>
         <ion-label style="margin-left: 5%">Permissões</ion-label>
       </ion-item>
-      <ion-item routerLink="/entregas">
+      <ion-item *ngIf="usuarioLogado.admin" routerLink="/entregas">
         <ion-icon name="folder-outline"></ion-icon>
         <ion-label style="margin-left: 5%">Lista de entregas</ion-label>
+      </ion-item>
+      <ion-item routerLink="/minha-agenda">
+        <ion-icon name="folder-outline"></ion-icon>
+        <ion-label style="margin-left: 5%">Minha Agenda</ion-label>
       </ion-item>
 <!--      <ion-item>-->
 <!--        <ion-icon name="newspaper-outline"></ion-icon>-->
@@ -82,7 +86,7 @@
     </div>
 
     <div align="center" class="horarios">
-      <h2>HORÁRIOS DISPONÍVEIS <ion-icon (click)="showDialog()" style="margin-left: 1%; padding-top: 3%" name="settings-sharp"></ion-icon></h2>
+      <h2>HORÁRIOS DISPONÍVEIS <ion-icon *ngIf="usuarioLogado.admin" (click)="showDialog()" style="margin-left: 1%; padding-top: 3%" name="settings-sharp"></ion-icon></h2>
     </div>
 
     <p-selectButton [style]="{'margin':'10px'}" [options]="horariosDisponiveis" [(ngModel)]="horario" optionLabel="label" optionValue="value"></p-selectButton>
