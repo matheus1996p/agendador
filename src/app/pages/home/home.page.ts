@@ -217,7 +217,10 @@ export class HomePage implements OnInit {
      console.log(this.pedidoSelecionado)
 
     await this.apiService.setMarcarHorario(this.pedidoSelecionado.numero, this.usuarioLogado.cpf, this.usuarioLogado.placa, horario, data).subscribe( data => {
-      console.log('horario Salvo');
+      this.presentToast('Horário Marcado com sucesso!');
+      this.horario = "off";
+      this.pedidoSelecionado = {};
+      this.carregaHorarios();
     });
   }
 
