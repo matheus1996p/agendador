@@ -4,6 +4,7 @@ import {AuthService} from "../../services/auth.service";
 import {LoadingController, ModalController, ToastController} from "@ionic/angular";
 import {AngularFirestore} from "@angular/fire/firestore";
 import {ApiService} from "../../services/api.service";
+import {startWith} from "rxjs/operators";
 
 @Component({
   selector: 'app-permissoes',
@@ -59,7 +60,7 @@ export class PermissoesPage implements OnInit {
    async listaUsuarios(){
     console.log(this.usuarios);
      await this.afs.collection('Usuarios')
-      .valueChanges().subscribe(usuarios => {
+      .valueChanges().pipe(startWith([])).subscribe(usuarios => {
         usuarios.forEach(pessoa =>{
           this.usuarios.push(pessoa);
         });

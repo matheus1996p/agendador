@@ -9,8 +9,8 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ApiService} from "../../services/api.service";
 import {LoadingController, ToastController} from "@ionic/angular";
-import {Observable} from "rxjs";
-import {map, startWith} from "rxjs/operators";
+import {Observable, Subject} from "rxjs";
+import {map, startWith, takeUntil} from "rxjs/operators";
 
 export interface Horario {
   horario: string;
@@ -37,6 +37,8 @@ export interface Conf {
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
 
   public usuarioLogado: User = {};
   calendar = {
@@ -275,7 +277,7 @@ export class HomePage implements OnInit, OnDestroy {
   async getUsuarioLogado() {
     const user = await this.authService.getAuth().currentUser;
     await this.afs.collection('Usuarios').doc(user.uid).
-    valueChanges().subscribe(data => {
+    valueChanges().pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
       this.usuarioLogado = data;
       this.carregaPedidos();
     });
@@ -318,7 +320,8 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }
