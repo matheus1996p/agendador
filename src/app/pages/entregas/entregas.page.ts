@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PrimeNGConfig} from "primeng/api";
 import {ApiService} from "../../services/api.service";
 import {User} from "../../interfaces/user";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-entregas',
   templateUrl: './entregas.page.html',
   styleUrls: ['./entregas.page.scss'],
 })
-export class EntregasPage implements OnInit {
+export class EntregasPage implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
 
   date = new Date();
 
@@ -35,7 +39,7 @@ export class EntregasPage implements OnInit {
   async carregaPedidos(){
 
     try{
-      await this.apiService.getDiasDisponiveis(this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).subscribe((data: any[]) =>{
+      await this.apiService.getDiasDisponiveis(this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
         this.pedidos = data;
 
         this.pedidos.sort(function (a,b) {
@@ -89,7 +93,7 @@ export class EntregasPage implements OnInit {
   async atualizaStatus(status, pedido){
     if(status === 1){
       try{
-        await this.apiService.updateHorario(status, pedido.id).subscribe( result =>{
+        await this.apiService.updateHorario(status, pedido.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe( result =>{
           if(result){
             this.carregaPedidos();
           }
@@ -99,7 +103,7 @@ export class EntregasPage implements OnInit {
       }
     } else {
       try {
-        await this.apiService.deleteHorario(pedido.id, this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).subscribe(result =>{
+        await this.apiService.deleteHorario(pedido.id, this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{
           console.log('horario deletado!!');
           this.carregaPedidos();
         });
@@ -162,6 +166,15 @@ export class EntregasPage implements OnInit {
       clear: 'Limpar'
     });
 
+  }
+
+  ionViewWillLeave() {
+    this.ngOnDestroy();
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

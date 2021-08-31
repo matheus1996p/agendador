@@ -86,7 +86,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   async carregaPedidos(){
     try{
-      await this.apiService.getListaPedidos(this.usuarioLogado.placa).subscribe((pedidos: any[]) =>{
+      await this.apiService.getListaPedidos(this.usuarioLogado.placa).pipe(takeUntil(this.ngUnsubscribe)).subscribe((pedidos: any[]) =>{
         this.listaPedidos = pedidos;
       })
     } catch (e) {
@@ -110,7 +110,7 @@ export class HomePage implements OnInit, OnDestroy {
       sabado: new FormControl(false),
     });
 
-    await this.apiService.getConfAgendamento().subscribe(conf =>{
+    await this.apiService.getConfAgendamento().pipe(takeUntil(this.ngUnsubscribe)).subscribe(conf =>{
       this.conf.controls['horaInicial'].setValue(conf[0].horainicial);
       this.conf.controls['bloqueados'].setValue(conf[0].bloqueados.split(', '));
       this.conf.controls['horaFinal'].setValue(conf[0].horafinal);
@@ -153,7 +153,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   async carregaHorarios(){
 
-    await this.apiService.getDiasDisponiveis(this.value.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).subscribe((data: any[]) =>{
+    await this.apiService.getDiasDisponiveis(this.value.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
       let horario = this.conf.controls['horaInicial'].value;
       let horarios = [];
       console.log(data.length);
@@ -216,7 +216,7 @@ export class HomePage implements OnInit, OnDestroy {
      console.log(this.usuarioLogado);
      console.log(this.pedidoSelecionado)
 
-    await this.apiService.setMarcarHorario(this.pedidoSelecionado.numero, this.usuarioLogado.cpf, this.usuarioLogado.placa, horario, data).subscribe( data => {
+    await this.apiService.setMarcarHorario(this.pedidoSelecionado.numero, this.usuarioLogado.cpf, this.usuarioLogado.placa, horario, data).pipe(takeUntil(this.ngUnsubscribe)).subscribe( data => {
       this.presentToast('Horário Marcado com sucesso!');
       this.horario = "off";
       this.pedidoSelecionado = {};
@@ -246,7 +246,7 @@ export class HomePage implements OnInit, OnDestroy {
     const sexta = conf.sexta ? 1 : 0;
     const sabado = conf.sabado ? 1 : 0;
 
-    this.apiService.setConfAgendamento(bloqueados, horaInicial, horaFinal, intervalo, domingo, segunda, terca, quarta, quinta, sexta, sabado).subscribe( data => {
+    this.apiService.setConfAgendamento(bloqueados, horaInicial, horaFinal, intervalo, domingo, segunda, terca, quarta, quinta, sexta, sabado).pipe(takeUntil(this.ngUnsubscribe)).subscribe( data => {
       console.log('Configuração Salva');
       this.display = false;
     });
