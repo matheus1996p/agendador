@@ -174,6 +174,11 @@ export class HomePage implements OnInit, OnDestroy {
             this.horariosDisponiveis.splice(j, 1);
           }
         }
+        for(let x = 0; x < this.conf.controls['bloqueados'].value.length; x++){
+          if(this.horariosDisponiveis[j].value == this.conf.controls['bloqueados'].value[x]){
+            this.horariosDisponiveis.splice(j, 1);
+          }
+        }
       }
     });
   }
@@ -229,9 +234,9 @@ export class HomePage implements OnInit, OnDestroy {
     if(conf.bloqueados.length > 0){
       for(let i = 0; i < conf.bloqueados.length; i++){
           if(i === 0){
-            bloqueados = bloqueados.concat(conf.bloqueados[i].horario);
+            bloqueados = bloqueados.concat(conf.bloqueados[i]);
           } else {
-            bloqueados = bloqueados.concat(', ' + conf.bloqueados[i].horario);
+            bloqueados = bloqueados.concat(', ' + conf.bloqueados[i]);
           }
       }
     }
