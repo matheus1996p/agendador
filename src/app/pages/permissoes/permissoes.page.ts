@@ -16,6 +16,8 @@ export class PermissoesPage implements OnInit {
   public usuarioLogado: User = {};
   public usuarios: any  = [];
   public step: number;
+  private loading: any;
+  admin: boolean;
 
   constructor(private authService: AuthService,
               private loadingCtrl: LoadingController,
@@ -53,18 +55,60 @@ export class PermissoesPage implements OnInit {
      this.afs.collection('Usuarios').doc(user.uid).
     valueChanges().subscribe(logado => {
       this.usuarioLogado = logado;
-      this.usuarioLogado.senha = '123456';
     });
   }
 
    async listaUsuarios(){
-    console.log(this.usuarios);
      await this.afs.collection('Usuarios')
       .valueChanges().pipe(startWith([])).subscribe(usuarios => {
+        this.usuarios = [];
         usuarios.forEach(pessoa =>{
           this.usuarios.push(pessoa);
         });
       });
+  }
+
+  async register(ev, usuario) {
+    await this.presentLoading();
+
+    try {
+      const newUser = Object.assign({}, usuario);
+      delete newUser.senha;
+      newUser.admin = ev.checked;
+      await this.afs.collection('Usuarios').doc(usuario.uid).update(newUser);
+    } catch (error) {
+      let message: string;
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          message = 'E-mail ja esta sendo utilizado!'
+          break;
+        case 'auth/invalid-email':
+          message = 'E-mail inválido'
+          break;
+        default: message = error.message
+      }
+
+      console.error(error);
+      this.presentToast(message);
+    } finally {
+      this.loading.dismiss();
+    }
+  }
+
+  async presentLoading() {
+    this.loading = await this.loadingCtrl.create({
+      message: 'Por favor, aguarde...'
+    });
+    return this.loading.present();
+
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

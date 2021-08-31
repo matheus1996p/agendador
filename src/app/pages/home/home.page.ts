@@ -180,11 +180,6 @@ export class HomePage implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    // this.filteredOptions = this.listaPedidos.pipe(
-    //   startWith(''),
-    //   map(value => this._filter(value))
-    // );
-
     this.config.setTranslation({
       accept: 'Aceitar',
       reject: 'Cancelar',
@@ -197,6 +192,9 @@ export class HomePage implements OnInit, OnDestroy {
       today: 'Hoje',
       clear: 'Limpar'
     });
+  }
+
+  ionViewWillEnter(){
     this.getUsuarioLogado();
   }
 
