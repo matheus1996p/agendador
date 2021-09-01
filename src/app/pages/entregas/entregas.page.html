@@ -39,7 +39,7 @@
             <span *ngIf="pedido.status === 1" style="margin-right: 3%"><p-tag severity="success"><ion-icon name="alarm"></ion-icon></p-tag></span>
             <span *ngIf="compararHora(horaAtual, pedido.horario) && pedido.status !== 1" style="margin-right: 3%"><p-tag severity="danger" ><ion-icon name="alarm"></ion-icon></p-tag></span>
             <span>Cliente: {{pedido.cpf}}</span>
-            <span style="margin-left: 5%">Nro. Pedido: {{pedido.pedido}}</span>
+            <span style="margin-left: 5%">Cod. do Produto: {{pedido.pedido}}</span>
             <span style="margin-left: 5%"><p-tag severity="info" value="{{pedido.horario}}"></p-tag></span>
           </mat-panel-title>
         </mat-expansion-panel-header>
