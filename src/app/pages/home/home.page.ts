@@ -21,6 +21,8 @@ export interface Pedido {
   dtemissao?: string;
   dtvalidade?: string;
   valormercadoria?: string;
+  quantidade?: number;
+  descricao?: string;
 }
 
 export interface Conf {
@@ -219,9 +221,9 @@ export class HomePage implements OnInit, OnDestroy {
   async salvarAgendamento(horario, data) {
      console.log(horario, data);
      console.log(this.usuarioLogado);
-     console.log(this.pedidoSelecionado)
+     console.log(this.pedidoSelecionado);
 
-    await this.apiService.setMarcarHorario(this.pedidoSelecionado.numero, this.usuarioLogado.cpf, this.usuarioLogado.placa, horario, data).pipe(takeUntil(this.ngUnsubscribe)).subscribe( data => {
+    await this.apiService.setMarcarHorario(this.pedidoSelecionado.numero, this.pedidoSelecionado.descricao, this.pedidoSelecionado.quantidade, this.usuarioLogado.cpf, this.usuarioLogado.placa, horario, data).pipe(takeUntil(this.ngUnsubscribe)).subscribe( data => {
       this.presentToast('Horário Marcado com sucesso!');
       this.horario = "off";
       this.pedidoSelecionado = {};

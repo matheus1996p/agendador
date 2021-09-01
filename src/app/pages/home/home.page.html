@@ -68,20 +68,34 @@
     </p-calendar>
 
     <div style="margin-top: 5%"  align="center" class="horarios">
-      <h2>SELECIONE O PEDIDO A RETIRAR</h2>
+      <h2>SELECIONE O PRODUTO A RETIRAR</h2>
 
-      <p-dropdown  [options]="listaPedidos" [(ngModel)]="pedidoSelecionado" optionLabel="numero" [filter]="true" filterBy="numero" [showClear]="true" placeholder="Selecione um pedido">
-        <ng-template pTemplate="selectedItem">
-          <div  *ngIf="pedidoSelecionado">
-            <div>{{pedidoSelecionado.descricao}}</div>
+      <ion-row>
+        <ion-col size="9">
+          <p-dropdown  [options]="listaPedidos" [(ngModel)]="pedidoSelecionado" optionLabel="numero" [filter]="true" filterBy="numero" [showClear]="true" placeholder="Selecione um produto">
+            <ng-template pTemplate="selectedItem">
+              <div  *ngIf="pedidoSelecionado">
+                <div>{{pedidoSelecionado.descricao}}</div>
+              </div>
+            </ng-template>
+            <ng-template let-pedido pTemplate="item">
+              <div class="country-item">
+                <div>{{pedido.descricao}}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </ion-col>
+        <ion-col  size="2">
+          <div style="padding-right: 10%">
+            <p-inputNumber [(ngModel)]="pedidoSelecionado.quantidade" [showButtons]="true" inputId="stacked">
+            </p-inputNumber>
           </div>
-        </ng-template>
-        <ng-template let-pedido pTemplate="item">
-          <div class="country-item">
-            <div>{{pedido.descricao}}</div>
-          </div>
-        </ng-template>
-      </p-dropdown>
+        </ion-col>
+        <ion-col size="1">
+
+        </ion-col>
+      </ion-row>
+
 
     </div>
 
@@ -89,8 +103,9 @@
       <h2>HORÁRIOS DISPONÍVEIS <ion-icon *ngIf="usuarioLogado.admin" (click)="showDialog()" style="margin-left: 1%; padding-top: 3%" name="settings-sharp"></ion-icon></h2>
     </div>
 
-    <p-selectButton [style]="{'margin':'10px'}" [options]="horariosDisponiveis" [(ngModel)]="horario" optionLabel="label" optionValue="value"></p-selectButton>
-
+    <div class="botoesHorarios">
+      <p-selectButton [style]="{'margin':'10px'}" [options]="horariosDisponiveis" [(ngModel)]="horario" optionLabel="label" optionValue="value"></p-selectButton>
+    </div>
   </div>
 
   <div *ngIf="horario != 'off' && pedidoSelecionado" align="center" style="margin-bottom: 2%">

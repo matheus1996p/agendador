@@ -140,15 +140,22 @@ mat-button-toggle {
   font-family: "Arial Black";
 }
 
-::ng-deep {
+::ng-deep  {
 
-  .p-button {
+  .botoesHorarios .p-button {
     color: #ffffff !important;
     background: #004e39 !important;
     font-family: "Arial Black" !important;
     font-weight: bold !important;
     margin: 3px !important;
     border: 0 none !important;
+
+  }
+
+  .horarios .p-button {
+    color: #ffffff !important;
+    background: #004e39 !important;
+    border: none;
 
   }
 
@@ -184,6 +191,12 @@ mat-button-toggle {
 
 .example-chip-list {
   width: 100%;
+}
+
+::ng-deep p-inputNumber {
+  input {
+  width: 50px !important;
+  }
 }
 
 

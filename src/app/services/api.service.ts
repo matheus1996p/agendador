@@ -101,9 +101,11 @@ export class ApiService {
     return this.http.post(`${environment.apiUrl}/confAgendamento`, params);
   }
 
-  setMarcarHorario(pedido, cpf, placa, horario, data){
+  setMarcarHorario(pedido, descricao, quantidade, cpf, placa, horario, data){
     const params = new HttpParams()
       .set('pedido', pedido)
+      .set('descricao', descricao)
+      .set('quantidade', quantidade)
       .set('cpf', cpf)
       .set('placa', placa)
       .set('horario', horario)

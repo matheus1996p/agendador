@@ -132,11 +132,10 @@ export class EntregasPage implements OnInit, OnDestroy {
     this.quantidadeTotal = 0;
     this.valorTotal = 0;
 
-    this.listaPedidosDetalhes.forEach(item =>{
-      if(item.numero == pedido.pedido){
+    this.pedidos.forEach(item =>{
+      if(item.pedido == pedido.pedido){
         this.pedidoExpandido.push(item);
         this.quantidadeTotal += item.quantidade;
-        this.valorTotal += item.valor;
       }
     });
 
