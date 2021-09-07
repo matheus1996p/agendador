@@ -30,10 +30,10 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/confAgendamento`);
   }
 
-  getListaPedidos(placa){
-    const params = new HttpParams()
-      .set('placa', placa);
-    return this.http.get(`${environment.apiUrl}/listaPedidos?${params.toString()}`);
+  getListaPedidos(){
+    // const params = new HttpParams()
+    //   .set('placa', placa);
+    return this.http.get(`${environment.apiUrl}/listaPedidos`);
   }
 
   getDiasDisponiveis(data){

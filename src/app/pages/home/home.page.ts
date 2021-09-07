@@ -88,7 +88,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   async carregaPedidos(){
     try{
-      await this.apiService.getListaPedidos(this.usuarioLogado.placa).pipe(takeUntil(this.ngUnsubscribe)).subscribe((pedidos: any[]) =>{
+      await this.apiService.getListaPedidos().pipe(takeUntil(this.ngUnsubscribe)).subscribe((pedidos: any[]) =>{
         this.listaPedidos = pedidos;
       })
     } catch (e) {
