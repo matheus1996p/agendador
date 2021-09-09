@@ -33,7 +33,7 @@ export class ApiService {
   getListaPedidos(){
     // const params = new HttpParams()
     //   .set('placa', placa);
-    return this.http.get(`${environment.apiUrl}/listaPedidos`);
+    return this.http.get(`${environment.apiUrl}/listaProdutos`);
   }
 
   getDiasDisponiveis(data){
@@ -67,14 +67,14 @@ export class ApiService {
   // getDetalhesPedidos(pedidos){
   //   const params = new HttpParams()
   //     .set('pedidos', pedidos);
-  //   return this.http.get(`${environment.apiUrl}/listaPedidos/detalhes?${params.toString()}`);
+  //   return this.http.get(`${environment.apiUrl}/listaProdutos/detalhes?${params.toString()}`);
   // }
 
   async getDetalhesPedidos(pedidos): Promise<any[]>{
     const listaDados = [];
     const params = new HttpParams()
       .set('pedidos', pedidos);
-    const dadosApi = await this.http.get<any[]>(`${environment.apiUrl}/listaPedidos/detalhes?${params.toString()}`).toPromise().then(dataApi=> {
+    const dadosApi = await this.http.get<any[]>(`${environment.apiUrl}/listaProdutos/detalhes?${params.toString()}`).toPromise().then(dataApi=> {
         dataApi.forEach(dado => {
           listaDados.push(dado);
         });

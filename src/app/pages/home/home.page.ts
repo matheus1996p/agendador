@@ -54,7 +54,7 @@ export class HomePage implements OnInit, OnDestroy {
   intervaloControl = new FormControl();
 
   listaPedidos: any[];
-  pedidoSelecionado: Pedido = {};
+  pedidoSelecionado: Pedido;
 
   value = new Date();
   pt: any;
@@ -155,7 +155,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   async carregaHorarios(){
 
-    await this.apiService.getDiasDisponiveis(this.value.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
+    await this.apiService.getDiasDisponiveis(this.value).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
       let horario = this.conf.controls['horaInicial'].value;
       let horarios = [];
       console.log(data.length);
