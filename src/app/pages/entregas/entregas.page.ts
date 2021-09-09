@@ -39,7 +39,7 @@ export class EntregasPage implements OnInit, OnDestroy {
   async carregaPedidos(){
 
     try{
-      await this.apiService.getDiasDisponiveis(this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
+      await this.apiService.getDiasDisponiveis(this.date).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
         this.pedidos = data;
 
         this.pedidos.sort(function (a,b) {
@@ -56,32 +56,11 @@ export class EntregasPage implements OnInit, OnDestroy {
             }
           }
         }
-        if(numero){
-          this.detalhesPedidos(numero);
-        }
       });
     } catch (e) {
       console.log(e);
     }
 
-
-  }
-
-   async detalhesPedidos(numero){
-    try {
-
-      await this.apiService.getDetalhesPedidos(numero).then(data => {
-        this.listaPedidosDetalhes = data;
-      });
-
-      // await this.apiService.getDetalhesPedidos(numero).subscribe((lista: any[]) => {
-      //   this.listaPedidosDetalhes = lista;
-      // });
-    } catch (e) {
-      console.log(e)
-    } finally {
-
-    }
 
   }
 
@@ -94,9 +73,7 @@ export class EntregasPage implements OnInit, OnDestroy {
     if(status === 1){
       try{
         await this.apiService.updateHorario(status, pedido.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe( result =>{
-          if(result){
             this.carregaPedidos();
-          }
         });
       } catch (e) {
         console.log(e);
@@ -104,7 +81,6 @@ export class EntregasPage implements OnInit, OnDestroy {
     } else {
       try {
         await this.apiService.deleteHorario(pedido.id, this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{
-          console.log('horario deletado!!');
           this.carregaPedidos();
         });
       } catch (e) {

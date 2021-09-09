@@ -49,21 +49,18 @@
               <tr>
                 <th style="min-width:200px">Produto</th>
                 <th style="min-width:200px">Quantidade</th>
-                <th style="min-width:200px">Valor</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
               <tr>
-                <td style="min-width:200px">{{item.item}}</td>
+                <td style="min-width:200px">{{item.descricao}}</td>
                 <td style="min-width:200px">{{item.quantidade}}</td>
-                <td style="min-width:200px">{{item.valor | currency:'BRL':true}}</td>
               </tr>
             </ng-template>
           </p-table>
         </div>
 
         <span style="font-weight: bold; margin-top: 5%">Quantidade Total: </span><span>{{quantidadeTotal}}</span>
-        <span style="font-weight: bold; margin-left: 3%">Valor Total: </span><span>{{valorTotal | currency:'BRL':true}}</span>
         <div style="margin-top: 5%" align="center">
           <ion-button *ngIf="pedido.status !== 1 && usuarioLogado.admin" size="small" color="success" (click)="atualizaStatus(1,pedido)"><ion-icon style="margin-right: 2%" name="checkmark-circle"></ion-icon>Retirado</ion-button>
           <ion-button size="small" color="danger" (click)="atualizaStatus(2,pedido)"><ion-icon style="margin-right: 2%" name="close-circle"></ion-icon>Cancelado</ion-button>

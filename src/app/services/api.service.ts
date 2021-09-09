@@ -51,9 +51,8 @@ export class ApiService {
 
   deleteHorario(id, data){
     const params = new HttpParams()
-      .set('id', id)
-      .set('data', data);
-    return this.http.get(`${environment.apiUrl}/marcarHorario/delete?${params.toString()}`);
+      .set('id', id);
+    return this.http.get(`${environment.apiUrl}/marcarHorario/delete/${id}`);
   }
 
 
@@ -61,7 +60,7 @@ export class ApiService {
     const params = new HttpParams()
       .set('status', status)
       .set('id', id);
-    return this.http.post(`${environment.apiUrl}/marcarHorario/atualiza`, params);
+    return this.http.post(`${environment.apiUrl}/marcarHorario/atualiza/${status}/${id}`, params);
   }
 
   // getDetalhesPedidos(pedidos){
@@ -101,15 +100,17 @@ export class ApiService {
     return this.http.post(`${environment.apiUrl}/confAgendamento`, params);
   }
 
-  setMarcarHorario(pedido, descricao, quantidade, cpf, placa, horario, data){
+  setMarcarHorario(pedido, descricao, quantidade, cpf, placa, data, horario){
     const params = new HttpParams()
       .set('pedido', pedido)
       .set('descricao', descricao)
       .set('quantidade', quantidade)
       .set('cpf', cpf)
       .set('placa', placa)
+      .set('data', data)
       .set('horario', horario)
-      .set('data', data);
+      .set('status', 0);
+
     return this.http.post(`${environment.apiUrl}/marcarHorario`, params);
   }
 

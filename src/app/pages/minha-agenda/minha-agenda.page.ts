@@ -54,7 +54,7 @@ export class MinhaAgendaPage implements OnInit {
   async carregaPedidos(){
 
     try{
-      await this.apiService.getMinhaAgenda(this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.'), this.usuarioLogado.cpf).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
+      await this.apiService.getMinhaAgenda(this.date, this.usuarioLogado.cpf).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
         this.pedidos = data;
 
         this.pedidos.sort(function (a,b) {
@@ -70,9 +70,6 @@ export class MinhaAgendaPage implements OnInit {
               numero = numero.concat(', ' + this.pedidos[i].pedido);
             }
           }
-        }
-        if(numero){
-          this.detalhesPedidos(numero);
         }
       });
     } catch (e) {
@@ -147,11 +144,10 @@ export class MinhaAgendaPage implements OnInit {
     this.quantidadeTotal = 0;
     this.valorTotal = 0;
 
-    this.listaPedidosDetalhes.forEach(item =>{
-      if(item.numero == pedido.pedido){
+    this.pedidos.forEach(item =>{
+      if(item.pedido == pedido.pedido){
         this.pedidoExpandido.push(item);
         this.quantidadeTotal += item.quantidade;
-        this.valorTotal += item.valor;
       }
     });
 
