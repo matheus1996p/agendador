@@ -72,14 +72,14 @@
 
       <ion-row>
         <ion-col size="9">
-          <p-dropdown  [virtualScroll]="true" [itemSize]="30" [options]="listaPedidos" [(ngModel)]="pedidoSelecionado" optionLabel="numero" [filter]="true" filterBy="numero" [showClear]="true" placeholder="Selecione um produto">
+          <p-dropdown  [virtualScroll]="true" [itemSize]="30" [options]="listaPedidos" [(ngModel)]="pedidoSelecionado" optionLabel="descricao" [filter]="true" filterBy="descricao" [showClear]="true" placeholder="Selecione um produto">
             <ng-template pTemplate="selectedItem">
               <div  *ngIf="pedidoSelecionado">
                 <div>{{pedidoSelecionado.descricao}}</div>
               </div>
             </ng-template>
             <ng-template let-pedido pTemplate="item">
-              <div class="country-item">
+              <div>
                 <div>{{pedido.descricao}}</div>
               </div>
             </ng-template>
