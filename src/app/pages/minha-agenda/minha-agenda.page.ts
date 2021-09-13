@@ -53,6 +53,8 @@ export class MinhaAgendaPage implements OnInit {
 
   async carregaPedidos(){
 
+    this.date.setHours(23, 59, 59);
+
     try{
       await this.apiService.getMinhaAgenda(this.date, this.usuarioLogado.cpf).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
         this.pedidos = data;

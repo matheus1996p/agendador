@@ -38,6 +38,8 @@ export class EntregasPage implements OnInit, OnDestroy {
 
   async carregaPedidos(){
 
+    this.date.setHours(23, 59, 59);
+
     try{
       await this.apiService.getDiasDisponiveis(this.date).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
         this.pedidos = data;
