@@ -162,6 +162,8 @@ export class HomePage implements OnInit, OnDestroy {
 
   async carregaHorarios(){
 
+    this.value.setHours(23, 59, 59);
+
     await this.apiService.getDiasDisponiveis(this.value).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
       let horario = this.conf.controls['horaInicial'].value;
       let horarios = [];
