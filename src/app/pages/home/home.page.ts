@@ -63,6 +63,7 @@ export class HomePage implements OnInit, OnDestroy {
   horariosDisponiveis: any[];
   horario: string = "off";
   display: boolean = false;
+  diasDesabilitados: any[] = [0, 6];
 
 // Variaveis do input Material
   selectable = true;
@@ -113,7 +114,7 @@ export class HomePage implements OnInit, OnDestroy {
       sabado: new FormControl(false),
     });
 
-    await this.apiService.getConfAgendamento().pipe(takeUntil(this.ngUnsubscribe)).subscribe(conf =>{
+    await this.apiService.getConfAgendamento().pipe(takeUntil(this.ngUnsubscribe)).subscribe((conf: any[]) =>{
       this.conf.controls['horaInicial'].setValue(conf[0].horainicial);
       this.conf.controls['bloqueados'].setValue(conf[0].bloqueados.split(', '));
       this.conf.controls['horaFinal'].setValue(conf[0].horafinal);
@@ -126,6 +127,7 @@ export class HomePage implements OnInit, OnDestroy {
       this.conf.controls['sexta'].setValue(conf[0].sexta === 1 ? true : false);
       this.conf.controls['sabado'].setValue(conf[0].sabado === 1 ? true : false);
 
+      this.desabilitarDias(conf);
       this.carregaHorarios();
 
     });
@@ -153,6 +155,10 @@ export class HomePage implements OnInit, OnDestroy {
     return data1 > data2;
   };
 
+
+  desabilitarDias(conf: any[]){
+
+  }
 
   async carregaHorarios(){
 

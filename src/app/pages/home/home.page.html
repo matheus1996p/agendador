@@ -62,8 +62,7 @@
 
 <!--  <p-scrollPanel [style]="{width: '100%', height: '485px'}" styleClass="custom">-->
   <div align="center" style="margin-top: 5%" class="ion-padding">
-
-    <p-calendar (onSelect)="onSelect($event)" [style]="{'width':'100%'}" [disabledDays]="[0]" [locale]="pt" [(ngModel)]="value" dateFormat="dd/mm/yy" [inline]="true" >
+    <p-calendar (onSelect)="onSelect($event)" [style]="{'width':'100%'}" [disabledDays]="diasDesabilitados" [locale]="pt" [(ngModel)]="value" dateFormat="dd/mm/yy" [inline]="true" >
 
     </p-calendar>
 
@@ -88,7 +87,7 @@
         </ion-col>
         <ion-col  size="2">
           <div style="padding-right: 10%">
-            <p-inputNumber [(ngModel)]="quantidade" [showButtons]="true" inputId="stacked">
+            <p-inputNumber [(ngModel)]="quantidade" inputId="stacked">
             </p-inputNumber>
           </div>
         </ion-col>
