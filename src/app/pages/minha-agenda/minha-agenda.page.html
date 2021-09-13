@@ -39,8 +39,7 @@
             <span *ngIf="pedido.status === 1" style="margin-right: 3%"><p-tag severity="success"><ion-icon name="alarm"></ion-icon></p-tag></span>
             <span *ngIf="compararHora(horaAtual, pedido.horario) && pedido.status !== 1" style="margin-right: 3%"><p-tag severity="danger" ><ion-icon name="alarm"></ion-icon></p-tag></span>
             <span>Cliente: {{pedido.cpf}}</span>
-            <span style="margin-left: 5%">Nro. Pedido: {{pedido.pedido}}</span>
-            <span style="margin-left: 5%"><p-tag severity="info" value="{{pedido.horario}}"></p-tag></span>
+            <span style="margin-left: 40%"><p-tag severity="info" value="{{pedido.horario}}"></p-tag></span>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div style="margin-bottom: 5%">
@@ -48,13 +47,13 @@
             <ng-template pTemplate="header">
               <tr>
                 <th style="min-width:200px">Produto</th>
-                <th style="min-width:200px">Quantidade</th>
+                <th style="min-width:200px; text-align: right">Quantidade</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
               <tr>
                 <td style="min-width:200px">{{item.descricao}}</td>
-                <td style="min-width:200px">{{item.quantidade}}</td>
+                <td style="min-width:200px; text-align: right">{{item.quantidade}}</td>
               </tr>
             </ng-template>
           </p-table>

@@ -108,9 +108,7 @@ export class MinhaAgendaPage implements OnInit {
     if(status === 1){
       try{
         await this.apiService.updateHorario(status, pedido.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe( result =>{
-          if(result){
             this.carregaPedidos();
-          }
         });
       } catch (e) {
         console.log(e);
