@@ -31,17 +31,17 @@
       <ion-label position="floating">Senha</ion-label>
       <ion-input disabled="true" type="password" [(ngModel)]="usuarioLogado.senha"></ion-input>
     </ion-item>
-    <a (click)="abrirModal()" style="font-size: 14px; margin: 2%">Redefinir senha</a>
+<!--    <a (click)="abrirModal()" style="font-size: 14px; margin: 2%">Redefinir senha</a>-->
 
   </div>
 
-  <div *ngIf="!usuarioSincronizado" style=" width: 100%">
-    <ion-buttons style="margin-top: 10%;">
-      <ion-button (click)="getPessoa()" style="width: 100%" class="botoes">
-        <ion-icon slot="start" name="sync"></ion-icon>Sincronizar com Agro
-      </ion-button>
-    </ion-buttons>
-  </div>
+<!--  <div *ngIf="!usuarioSincronizado" style=" width: 100%">-->
+<!--    <ion-buttons style="margin-top: 10%;">-->
+<!--      <ion-button (click)="getPessoa()" style="width: 100%" class="botoes">-->
+<!--        <ion-icon slot="start" name="sync"></ion-icon>Sincronizar com Agro-->
+<!--      </ion-button>-->
+<!--    </ion-buttons>-->
+<!--  </div>-->
 
   <div *ngIf="usuarioSincronizado" style=" width: 100%">
     <ion-buttons style="margin-top: 10%;">
