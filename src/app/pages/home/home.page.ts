@@ -233,7 +233,7 @@ export class HomePage implements OnInit, OnDestroy {
      console.log(this.pedidoSelecionado);
 
     await this.apiService.setMarcarHorario(this.pedidoSelecionado.numero, this.pedidoSelecionado.descricao, this.quantidade, this.usuarioLogado.cpf, this.usuarioLogado.placa, data, horario).pipe(takeUntil(this.ngUnsubscribe)).subscribe( data => {
-      this.presentToast('Horário Marcado com sucesso!');
+      this.presentToast('Horário agendado com sucesso!');
       this.horario = "off";
       this.pedidoSelecionado = {};
       this.carregaHorarios();
