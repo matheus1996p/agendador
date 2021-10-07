@@ -1,28 +1,61 @@
 <ion-header>
   <ion-toolbar>
     <ion-icon routerLink="/home" style="margin-left: 2%" slot="start" size="large" name="arrow-back-outline"></ion-icon>
-    <ion-title align="center">Permissões</ion-title>
+    <ion-title align="center">Configurações</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content id="tela">
+
+
   <div class="body">
+    <h2 align="center">Lista de Usuários</h2>
     <p-scrollPanel [style]="{width: '100%', height: '400px'}" styleClass="custom">
-      <mat-accordion class="example-headers-align">
-        <mat-expansion-panel *ngFor="let usuario of usuarios; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{usuario.usuario}}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-slide-toggle [checked]="usuario.admin" (change)="register($event, usuario)">Administrador</mat-slide-toggle>
-          <mat-action-row>
-            <button *ngIf="i > 0" mat-button color="warn" (click)="prevStep()">Anterior</button>
-            <button mat-button color="primary" (click)="nextStep()">Próximo</button>
-          </mat-action-row>
-        </mat-expansion-panel>
-      </mat-accordion>
+<!--      <mat-accordion class="example-headers-align">-->
+<!--        <mat-expansion-panel *ngFor="let usuario of usuarios; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>-->
+<!--          <mat-expansion-panel-header>-->
+<!--            <mat-panel-title>-->
+<!--              {{usuario.usuario}}-->
+<!--            </mat-panel-title>-->
+<!--          </mat-expansion-panel-header>-->
+<!--          <mat-slide-toggle [checked]="usuario.admin" (change)="register($event, usuario)">-->
+<!--            Administrador-->
+<!--          </mat-slide-toggle>-->
+
+<!--          <p-multiSelect [options]="listaNotaConf" [(ngModel)]="usuario.conf"-->
+<!--                         defaultLabel="Selecione as Conf. de Nota" optionLabel="conf"-->
+<!--                         selectedItemsLabel="{0} items selected"></p-multiSelect>-->
+
+<!--          <mat-action-row>-->
+<!--            <button *ngIf="i > 0" mat-button color="warn" (click)="prevStep()">Anterior</button>-->
+<!--            <button mat-button color="primary" (click)="nextStep()">Próximo</button>-->
+<!--          </mat-action-row>-->
+<!--        </mat-expansion-panel>-->
+<!--      </mat-accordion>-->
+      <p-accordion>
+        <p-accordionTab *ngFor="let usuario of usuarios; let i = index" header="{{usuario.usuario}}">
+
+          <p class="titulo">Configurações de Nota</p>
+
+          <p-multiSelect [options]="listaNotaConf" [(ngModel)]="usuario.conf"
+                         defaultLabel="Selecione as Conf. de Nota" optionLabel="conf"
+                         autoWidth="false" [style]="{'width':'80%'}"
+                         selectedItemsLabel="{0} itens selecionados"></p-multiSelect>
+
+          <p class="titulo">Permissões de Acesso</p>
+
+          <mat-slide-toggle [checked]="usuario.admin" (change)="register($event, usuario)">
+                Administrador
+          </mat-slide-toggle>
+
+
+
+        </p-accordionTab>
+      </p-accordion>
     </p-scrollPanel>
+
+
+
 
 <!--    <ion-list>-->
 <!--      <ion-item *ngFor="let usuario of usuarios">-->

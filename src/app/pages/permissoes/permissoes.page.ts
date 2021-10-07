@@ -4,7 +4,15 @@ import {AuthService} from "../../services/auth.service";
 import {LoadingController, ModalController, ToastController} from "@ionic/angular";
 import {AngularFirestore} from "@angular/fire/firestore";
 import {ApiService} from "../../services/api.service";
-import {startWith} from "rxjs/operators";
+import {startWith, takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+
+
+interface Conf {
+  id: string,
+  descricao: string
+}
+
 
 @Component({
   selector: 'app-permissoes',
@@ -13,8 +21,10 @@ import {startWith} from "rxjs/operators";
 })
 export class PermissoesPage implements OnInit {
 
+  private ngUnsubscribe = new Subject();
   public usuarioLogado: User = {};
   public usuarios: any  = [];
+  public listaNotaConf: any[];
   public step: number;
   private loading: any;
   admin: boolean;
@@ -33,6 +43,7 @@ export class PermissoesPage implements OnInit {
   ionViewWillEnter(){
     this.usuarios = [];
     this.listaUsuarios();
+    this.carregaConfNotas();
     this.getUsuarioLogado();
   }
 
@@ -56,6 +67,17 @@ export class PermissoesPage implements OnInit {
     valueChanges().subscribe(logado => {
       this.usuarioLogado = logado;
     });
+  }
+
+  async carregaConfNotas(){
+    try{
+      await this.apiService.getListaConfNota().pipe(takeUntil(this.ngUnsubscribe)).subscribe((list: any[]) =>{
+        this.listaNotaConf = list;
+        console.log(this.listaNotaConf);
+      })
+    } catch (e) {
+      console.log(e);
+    }
   }
 
    async listaUsuarios(){

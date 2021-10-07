@@ -36,6 +36,12 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/listaProdutos`);
   }
 
+  getListaConfNota(){
+    // const params = new HttpParams()
+    //   .set('placa', placa);
+    return this.http.get(`${environment.apiUrl}/sql/pedidos/notaConf`);
+  }
+
   getDiasDisponiveis(data){
     const params = new HttpParams()
       .set('data', data);

@@ -24,8 +24,8 @@ export const environment = {
     measurementId: "G-HQ1D5M53GH"
   },
   // apiUrl: 'http://187.6.254.130:8181'
-  apiUrl: 'http://orionagrotitan.viasoft.com.br:38081'
-  // apiUrl: 'http://localhost:8181'
+  // apiUrl: 'http://orionagrotitan.viasoft.com.br:38081'
+  apiUrl: 'http://localhost:38081'
 };
 
 /*

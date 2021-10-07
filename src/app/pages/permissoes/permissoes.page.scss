@@ -1,9 +1,19 @@
 .body {
-  margin-top: 50%;
+  margin-top: 40%;
+  h2 {
+    color: #004e39;
+  }
 }
 
 .footer{
   margin-top: 15%;
+}
+
+.titulo {
+  color: #004e39;
+  font-size: 16px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 #tela{
@@ -76,3 +86,10 @@
     }
   }
 }
+
+::ng-deep .p-multiselect-items-wrapper {
+  max-width: 450px !important;
+}
+
+
+

@@ -11,6 +11,9 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {ScrollPanelModule} from "primeng/scrollpanel";
+import {MultiSelectModule} from 'primeng/multiselect';
+import {AccordionModule} from 'primeng/accordion';
+
 
 @NgModule({
   imports: [
@@ -21,7 +24,9 @@ import {ScrollPanelModule} from "primeng/scrollpanel";
     MatExpansionModule,
     MatButtonModule,
     MatSlideToggleModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    MultiSelectModule,
+    AccordionModule
   ],
   declarations: [PermissoesPage]
 })
