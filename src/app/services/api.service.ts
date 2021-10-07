@@ -42,6 +42,12 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/sql/pedidos/notaConf`);
   }
 
+  getVendaFutura(cpf){
+    const params = new HttpParams()
+      .set('CPF', cpf);
+    return this.http.get(`${environment.apiUrl}/sql/pedidos/vendaFutura?${params.toString()}`);
+  }
+
   getDiasDisponiveis(data){
     const params = new HttpParams()
       .set('data', data);

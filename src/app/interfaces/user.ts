@@ -6,4 +6,5 @@ export interface User {
   senha?: string;
   uid?: string;
   admin?: boolean;
+  conf?: [];
 }

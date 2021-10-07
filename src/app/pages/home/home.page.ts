@@ -88,9 +88,12 @@ export class HomePage implements OnInit, OnDestroy {
 
   }
 
-  async carregaPedidos(){
+  async carregaPedidos(cpf){
     try{
-      await this.apiService.getListaPedidos().pipe(takeUntil(this.ngUnsubscribe)).subscribe((pedidos: any[]) =>{
+      // await this.apiService.getListaPedidos().pipe(takeUntil(this.ngUnsubscribe)).subscribe((pedidos: any[]) =>{
+      //   this.listaPedidos = pedidos;
+      // })
+      await this.apiService.getVendaFutura(cpf.replaceAll('.', '').replaceAll('-','')).pipe(takeUntil(this.ngUnsubscribe)).subscribe((pedidos: any[]) =>{
         this.listaPedidos = pedidos;
       })
     } catch (e) {
@@ -293,7 +296,7 @@ export class HomePage implements OnInit, OnDestroy {
     await this.afs.collection('Usuarios').doc(user.uid).
     valueChanges().pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
       this.usuarioLogado = data;
-      this.carregaPedidos();
+      this.carregaPedidos(this.usuarioLogado.cpf);
     });
   }
 
