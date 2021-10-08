@@ -60,20 +60,26 @@ export class MinhaAgendaPage implements OnInit {
     try{
       await this.apiService.getMinhaAgenda(this.date, this.usuarioLogado.cpf).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
         this.pedidos = data;
+        let existe = false;
 
         this.pedidos.sort(function (a,b) {
           return a.horario < b.horario ? -1 : a.horario > b.horario ? 1 : 0;
         });
 
         this.pedidos.forEach(pedido =>{
+          existe = false;
           if(this.pedidosCab.length == 0){
             this.pedidosCab.push(pedido)
           } else {
             this.pedidosCab.forEach(pedcab =>{
-              if(pedcab.horario !== pedido.horario){
-                this.pedidosCab.push(pedido);
+              if(pedcab.horario == pedido.horario){
+                existe = true;
               }
-            })
+            });
+
+            if(!existe){
+              this.pedidosCab.push(pedido);
+            }
           }
         });
 
