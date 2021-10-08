@@ -61,18 +61,20 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/marcarHorario/minhaAgenda?${params.toString()}`);
   }
 
-  deleteHorario(id, data){
+  deleteHorario(horario, data){
     const params = new HttpParams()
-      .set('id', id);
-    return this.http.get(`${environment.apiUrl}/marcarHorario/delete/${id}`);
+      .set('horario', horario)
+      .set('data', data);
+    return this.http.get(`${environment.apiUrl}/marcarHorario/delete/${horario}/${data}`);
   }
 
 
-  updateHorario(status, id){
+  updateHorario(status, horario, data){
     const params = new HttpParams()
       .set('status', status)
-      .set('id', id);
-    return this.http.post(`${environment.apiUrl}/marcarHorario/atualiza/${status}/${id}`, params);
+      .set('horario', horario)
+      .set('data', data);
+    return this.http.post(`${environment.apiUrl}/marcarHorario/atualiza/${status}/${horario}/${data}`, params);
   }
 
   // getDetalhesPedidos(pedidos){

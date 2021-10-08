@@ -74,7 +74,7 @@ export class EntregasPage implements OnInit, OnDestroy {
   async atualizaStatus(status, pedido){
     if(status === 1){
       try{
-        await this.apiService.updateHorario(status, pedido.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe( result =>{
+        await this.apiService.updateHorario(status, pedido.horario, new Date(pedido.data)).pipe(takeUntil(this.ngUnsubscribe)).subscribe( result =>{
             this.carregaPedidos();
         });
       } catch (e) {
@@ -82,7 +82,7 @@ export class EntregasPage implements OnInit, OnDestroy {
       }
     } else {
       try {
-        await this.apiService.deleteHorario(pedido.id, this.date.toLocaleDateString('pt-BR').replace('/', '.').replace('/', '.')).pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{
+        await this.apiService.deleteHorario(pedido.horario, new Date(pedido.data)).pipe(takeUntil(this.ngUnsubscribe)).subscribe(result =>{
           this.carregaPedidos();
         });
       } catch (e) {

@@ -254,7 +254,7 @@ export class HomePage implements OnInit, OnDestroy {
       this.listaProdutos).pipe(takeUntil(this.ngUnsubscribe)).subscribe( data => {
       this.presentToast('Horário agendado com sucesso!');
       this.horario = "off";
-      this.listaProdutos = [];
+      this.listaProdutos = undefined;
       this.carregaHorarios();
     });
   }
