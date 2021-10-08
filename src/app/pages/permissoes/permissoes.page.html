@@ -35,19 +35,22 @@
       <p-accordion>
         <p-accordionTab *ngFor="let usuario of usuarios; let i = index" header="{{usuario.usuario}}">
 
-          <p class="titulo">Configurações de Nota</p>
+          <div *ngIf="usuario.admin">
+            <p class="titulo">Configurações de Nota</p>
 
-          <p-multiSelect [options]="listaNotaConf" [(ngModel)]="usuario.conf"
-                         defaultLabel="Selecione as Conf. de Nota" optionLabel="conf"
-                         autoWidth="false" [style]="{'width':'80%'}"
-                         selectedItemsLabel="{0} itens selecionados"></p-multiSelect>
+            <p-multiSelect [options]="listaNotaConf" [(ngModel)]="usuario.conf"
+                           defaultLabel="Selecione as Conf. de Nota" optionLabel="conf"
+                           autoWidth="false" [style]="{'width':'80%'}"
+                           selectedItemsLabel="{0} itens selecionados"></p-multiSelect>
 
-          <p class="titulo">Configurações de Pedido</p>
+            <p class="titulo">Configurações de Pedido</p>
 
-          <p-multiSelect [options]="listaPedConf" [(ngModel)]="usuario.confped"
-                         defaultLabel="Selecione as Conf. de Pedido" optionLabel="conf"
-                         autoWidth="false" [style]="{'width':'80%'}"
-                         selectedItemsLabel="{0} itens selecionados"></p-multiSelect>
+            <p-multiSelect [options]="listaPedConf" [(ngModel)]="usuario.confped"
+                           defaultLabel="Selecione as Conf. de Pedido" optionLabel="conf"
+                           autoWidth="false" [style]="{'width':'80%'}"
+                           selectedItemsLabel="{0} itens selecionados"></p-multiSelect>
+
+          </div>
 
           <p class="titulo">Permissões de Acesso</p>
 
