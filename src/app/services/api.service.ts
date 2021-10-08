@@ -31,15 +31,15 @@ export class ApiService {
   }
 
   getListaPedidos(){
-    // const params = new HttpParams()
-    //   .set('placa', placa);
     return this.http.get(`${environment.apiUrl}/listaProdutos`);
   }
 
   getListaConfNota(){
-    // const params = new HttpParams()
-    //   .set('placa', placa);
     return this.http.get(`${environment.apiUrl}/sql/pedidos/notaConf`);
+  }
+
+  getListaConfPedidos(){
+    return this.http.get(`${environment.apiUrl}/sql/pedidos/pedidoConf`);
   }
 
   getVendaFutura(cpf){

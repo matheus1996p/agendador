@@ -25,6 +25,7 @@ export class PermissoesPage implements OnInit {
   public usuarioLogado: User = {};
   public usuarios: any  = [];
   public listaNotaConf: any[];
+  public listaPedConf: any[];
   public step: number;
   private loading: any;
   admin: boolean;
@@ -44,6 +45,7 @@ export class PermissoesPage implements OnInit {
     this.usuarios = [];
     this.listaUsuarios();
     this.carregaConfNotas();
+    this.carregaConfPedidos();
     this.getUsuarioLogado();
   }
 
@@ -73,7 +75,15 @@ export class PermissoesPage implements OnInit {
     try{
       await this.apiService.getListaConfNota().pipe(takeUntil(this.ngUnsubscribe)).subscribe((list: any[]) =>{
         this.listaNotaConf = list;
-        console.log(this.listaNotaConf);
+      })
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async carregaConfPedidos(){
+    try{
+      await this.apiService.getListaConfPedidos().pipe(takeUntil(this.ngUnsubscribe)).subscribe((list: any[]) =>{
+        this.listaPedConf = list;
       })
     } catch (e) {
       console.log(e);
