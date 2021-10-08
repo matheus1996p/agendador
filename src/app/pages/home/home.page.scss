@@ -222,4 +222,12 @@ h2 {
   color: #ffffff;
   border: none;
 }
+.retirar {
+  ::ng-deep .p-inputnumber-input {
+    background-color: #5c9579;
+    color: #ffffff;
+    border: none;
+  }
+}
+
 

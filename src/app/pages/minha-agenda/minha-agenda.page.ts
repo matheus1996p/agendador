@@ -39,7 +39,6 @@ export class MinhaAgendaPage implements OnInit {
 
   ionViewWillEnter(){
     this.getUsuarioLogado();
-    this.carregaPedidos();
   }
 
   async getUsuarioLogado() {
@@ -97,6 +96,7 @@ export class MinhaAgendaPage implements OnInit {
     } catch (e) {
       console.log(e);
     }
+
 
 
   }
@@ -166,7 +166,7 @@ export class MinhaAgendaPage implements OnInit {
     this.valorTotal = 0;
 
     this.pedidos.forEach(item =>{
-      if(item.pedido == pedido.pedido){
+      if(item.horario == pedido.horario){
         this.pedidoExpandido.push(item);
         this.quantidadeTotal += item.quantidade;
       }
