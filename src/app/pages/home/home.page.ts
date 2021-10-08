@@ -219,7 +219,7 @@ export class HomePage implements OnInit, OnDestroy {
   ionViewWillEnter(){
     this.getUsuarioLogado();
     this.listaProdutos = this.transfereService.getData();
-    if(this.listaProdutos.length > 0){
+    if(this.listaProdutos){
       this.listaProdutos.forEach(produto => {
         produto.placa = this.usuarioLogado.placa;
         produto.cpf = this.usuarioLogado.cpf;
@@ -243,7 +243,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   async salvarAgendamento(horario, data) {
 
-    if(this.listaProdutos.length > 0){
+    if(this.listaProdutos){
       this.listaProdutos.forEach(produto => {
         produto.data = data;
         produto.horario = horario;

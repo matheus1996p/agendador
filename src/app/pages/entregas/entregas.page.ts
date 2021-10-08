@@ -17,6 +17,7 @@ export class EntregasPage implements OnInit, OnDestroy {
   date = new Date();
 
   public pedidos = new Array<any>();
+  public pedidosCab = new Array<any>();
   public listaPedidosDetalhes = new Array<any>();
   public pedidoExpandido = new Array<any>();
 
@@ -38,6 +39,7 @@ export class EntregasPage implements OnInit, OnDestroy {
 
   async carregaPedidos(){
 
+    this.pedidosCab = new Array<any>();
     this.date.setHours(23, 59, 59);
 
     try{
@@ -46,6 +48,18 @@ export class EntregasPage implements OnInit, OnDestroy {
 
         this.pedidos.sort(function (a,b) {
           return a.horario < b.horario ? -1 : a.horario > b.horario ? 1 : 0;
+        });
+
+        this.pedidos.forEach(pedido =>{
+          if(this.pedidosCab.length == 0){
+            this.pedidosCab.push(pedido)
+          } else {
+            this.pedidosCab.forEach(pedcab =>{
+                if(pedcab.horario !== pedido.horario){
+                   this.pedidosCab.push(pedido);
+                }
+            })
+          }
         });
 
         let numero = '';
@@ -72,6 +86,7 @@ export class EntregasPage implements OnInit, OnDestroy {
   }
 
   async atualizaStatus(status, pedido){
+
     if(status === 1){
       try{
         await this.apiService.updateHorario(status, pedido.horario, new Date(pedido.data)).pipe(takeUntil(this.ngUnsubscribe)).subscribe( result =>{
@@ -111,7 +126,7 @@ export class EntregasPage implements OnInit, OnDestroy {
     this.valorTotal = 0;
 
     this.pedidos.forEach(item =>{
-      if(item.pedido == pedido.pedido){
+      if(item.horario == pedido.horario){
         this.pedidoExpandido.push(item);
         this.quantidadeTotal += item.quantidade;
       }
