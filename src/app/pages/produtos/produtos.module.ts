@@ -18,8 +18,7 @@ import {TableModule} from "primeng/table";
     IonicModule,
     ProdutosPageRoutingModule,
     ScrollPanelModule,
-    PickListModule,
-    TableModule
+    PickListModule
   ],
   declarations: [ProdutosPage]
 })

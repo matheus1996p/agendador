@@ -11,6 +11,7 @@ import {ApiService} from "../../services/api.service";
 import {LoadingController, ToastController} from "@ionic/angular";
 import {Observable, Subject} from "rxjs";
 import {map, startWith, takeUntil} from "rxjs/operators";
+import {TransfereService} from "../../services/transfere.service";
 
 export interface Horario {
   horario: string;
@@ -54,6 +55,7 @@ export class HomePage implements OnInit, OnDestroy {
   intervaloControl = new FormControl();
 
   listaPedidos: any[];
+  listaProdutos: any[];
   pedidoSelecionado: Pedido;
   quantidade: number = 0;
 
@@ -82,7 +84,8 @@ export class HomePage implements OnInit, OnDestroy {
               private fb: FormBuilder,
               private apiService: ApiService,
               private toastCtrl: ToastController,
-              private loadingCtrl: LoadingController) {
+              private loadingCtrl: LoadingController,
+              private transfereService:TransfereService) {
 
     this.carregaConf();
 
@@ -215,6 +218,8 @@ export class HomePage implements OnInit, OnDestroy {
 
   ionViewWillEnter(){
     this.getUsuarioLogado();
+    this.listaProdutos = this.transfereService.getData();
+    console.log(this.listaProdutos);
   }
 
   next(){
