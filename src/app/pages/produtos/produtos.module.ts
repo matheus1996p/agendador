@@ -9,6 +9,7 @@ import { ProdutosPageRoutingModule } from './produtos-routing.module';
 import { ProdutosPage } from './produtos.page';
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import {PickListModule} from "primeng/picklist";
+import {TableModule} from "primeng/table";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {PickListModule} from "primeng/picklist";
     IonicModule,
     ProdutosPageRoutingModule,
     ScrollPanelModule,
-    PickListModule
+    PickListModule,
+    TableModule
   ],
   declarations: [ProdutosPage]
 })

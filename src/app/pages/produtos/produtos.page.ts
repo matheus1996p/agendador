@@ -20,7 +20,7 @@ export class ProdutosPage implements OnInit {
 
   sourceProducts: any[] = [];
 
-  targetProducts: any[] = [];
+  produtosSelecionados: any[] = [];
 
   constructor(private authService: AuthService,
               private loadingCtrl: LoadingController,
