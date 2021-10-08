@@ -48,6 +48,11 @@ const routes: Routes = [
     path: 'minha-agenda',
     loadChildren: () => import('./pages/minha-agenda/minha-agenda.module').then( m => m.MinhaAgendaPageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'produtos',
+    loadChildren: () => import('./pages/produtos/produtos.module').then( m => m.ProdutosPageModule),
+    canActivate: [AuthGuard]
   }
 ];
 

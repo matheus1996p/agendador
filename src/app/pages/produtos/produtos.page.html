@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon routerLink="/home" style="margin-left: 2%" slot="start" size="large" name="arrow-back-outline"></ion-icon>
+    <ion-title align="center">Produtos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="tela">
+
+
+  <div class="body">
+    <h2 align="center">Lista de Produtos</h2>
+    <p-scrollPanel [style]="{width: '100%', height: '500px'}" styleClass="custom">
+      <p-pickList [source]="sourceProducts" [target]="targetProducts" sourceHeader="Produtos disponíveis" targetHeader="Produtos selecionados"
+                  [responsive]="true" [sourceStyle]="{'height':'11rem'}" [targetStyle]="{'height':'11rem'}" filterBy="itemdesc"
+                  sourceFilterPlaceholder="Buscar produto..." targetFilterPlaceholder="Buscar produto...">
+        <ng-template let-product pTemplate="item">
+          <div class="product-item">
+            <div class="product-list-detail">
+
+              <span class="product-category"><ion-icon name="cube"></ion-icon> {{product.itemdesc}}</span>
+            </div>
+            <div class="product-list-action">
+              <h3>Quantidade: {{product.saldo}}</h3>
+            </div>
+          </div>
+        </ng-template>
+      </p-pickList>
+    </p-scrollPanel>
+
+
+  </div>
+
+</ion-content>
