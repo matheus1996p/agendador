@@ -26,6 +26,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {DropdownModule} from "primeng/dropdown";
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import {InputNumberModule} from "primeng/inputnumber";
+import {InputTextModule} from "primeng/inputtext";
 
 registerLocaleData(localept, 'pt');
 
@@ -54,7 +55,8 @@ registerLocaleData(localept, 'pt');
         MatAutocompleteModule,
         DropdownModule,
         ScrollPanelModule,
-         InputNumberModule
+         InputNumberModule,
+      InputTextModule
     ],
   declarations: [HomePage],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' },{provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}]

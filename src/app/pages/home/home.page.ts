@@ -219,6 +219,11 @@ export class HomePage implements OnInit, OnDestroy {
   ionViewWillEnter(){
     this.getUsuarioLogado();
     this.listaProdutos = this.transfereService.getData();
+    if(this.listaProdutos.length > 0){
+      this.listaProdutos.forEach(produto => {
+        produto.placa = this.usuarioLogado.placa
+      });
+    }
     console.log(this.listaProdutos);
   }
 

@@ -67,45 +67,59 @@
     </p-calendar>
 
     <div style="margin-top: 5%"  align="center" class="horarios">
-      <h2>Produtos selecionados</h2>
+      <h1 *ngIf="listaProdutos">Produtos selecionados</h1>
+
+        <ion-row *ngIf="listaProdutos" class="TabHeader">
+          <ion-col size="5">
+            <h2 class="tabHead" align="left">Produto</h2>
+          </ion-col>
+          <ion-col size="3">
+            <h2 class="tabHead" align="left">Placa</h2>
+          </ion-col>
+          <ion-col size="2">
+            <h2 class="tabHead">Saldo</h2>
+          </ion-col>
+          <ion-col size="2">
+            <h2 class="tabHead">Retirar</h2>
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let produto of listaProdutos">
+          <ion-col size="5">
+            <div align="left">
+              <input disabled="true" style="width: 100%; background-color: #184e34; color: #ffffff; border: none;" id="produto" type="produto" pInputText [(ngModel)]="produto.itemdesc" />
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div align="left">
+              <input style="width: 100%; background-color: #184e34; color: #ffffff; border: none;" id="placa" type="placa" pInputText [(ngModel)]="produto.placa" />
+            </div>
+          </ion-col>
+          <ion-col  size="2">
+            <div style="padding-right: 10%">
+              <p-inputNumber disabled="true" [(ngModel)]="produto.saldo" mask="separator.2" separatorLimit="1000" inputId="stacked">
+              </p-inputNumber>
+            </div>
+          </ion-col>
+          <ion-col  size="2">
+            <div style="padding-right: 10%">
+              <p-inputNumber [(ngModel)]="produto.retirar" mask="separator.2" [max]="produto.saldo" separatorLimit="1000" inputId="stacked">
+              </p-inputNumber>
+            </div>
+          </ion-col>
+
+        </ion-row>
 
 
-      <div align="center" style="margin-bottom: 2%">
+
+      <div align="center" style="margin: 4% 0 2% 0">
         <ion-button style="width: 70%;" color="light" routerLink="/produtos"><span style="color: #1f5436; font-weight: bold">Adicionar Produto</span></ion-button>
       </div>
-
-<!--      <ion-row>-->
-<!--        <ion-col size="9">-->
-<!--          <p-dropdown  [virtualScroll]="true" [itemSize]="30" [options]="listaPedidos" [(ngModel)]="pedidoSelecionado" optionLabel="descricao" [filter]="true" filterBy="descricao" [showClear]="true" placeholder="Selecione um produto">-->
-<!--            <ng-template pTemplate="selectedItem">-->
-<!--              <div  *ngIf="pedidoSelecionado">-->
-<!--                <div>{{pedidoSelecionado.descricao}}</div>-->
-<!--              </div>-->
-<!--            </ng-template>-->
-<!--            <ng-template let-pedido pTemplate="item">-->
-<!--              <div>-->
-<!--                <div>{{pedido.descricao}}</div>-->
-<!--              </div>-->
-<!--            </ng-template>-->
-<!--          </p-dropdown>-->
-
-<!--        </ion-col>-->
-<!--        <ion-col  size="2">-->
-<!--          <div style="padding-right: 10%">-->
-<!--            <p-inputNumber [(ngModel)]="quantidade" mask="separator.2" separatorLimit="1000" inputId="stacked">-->
-<!--            </p-inputNumber>-->
-<!--          </div>-->
-<!--        </ion-col>-->
-<!--        <ion-col size="1">-->
-
-<!--        </ion-col>-->
-<!--      </ion-row>-->
-
 
     </div>
 
     <div align="center" class="horarios">
-      <h2>Horários disponíveis <ion-icon *ngIf="usuarioLogado.admin" (click)="showDialog()" style="margin-left: 1%; padding-top: 3%" name="settings-sharp"></ion-icon></h2>
+      <h1>Horários disponíveis <ion-icon *ngIf="usuarioLogado.admin" (click)="showDialog()" style="margin-left: 1%; padding-top: 3%" name="settings-sharp"></ion-icon></h1>
     </div>
 
     <div class="botoesHorarios">
@@ -113,7 +127,7 @@
     </div>
   </div>
 
-  <div *ngIf="horario != 'off' && pedidoSelecionado" align="center" style="margin-bottom: 2%">
+  <div *ngIf="horario != 'off' && listaPedidos" align="center" style="margin-bottom: 2%">
     <ion-button style="width: 90%;" color="light" (click)="salvarAgendamento(horario, value)"><span style="color: #1f5436; font-weight: bold">Enviar</span></ion-button>
   </div>
 <!--  </p-scrollPanel>-->
