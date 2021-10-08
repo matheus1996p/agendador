@@ -87,7 +87,7 @@
         <ion-row *ngFor="let produto of listaProdutos">
           <ion-col size="5">
             <div align="left">
-              <input disabled="true" style="width: 100%; background-color: #184e34; color: #ffffff; border: none;" id="produto" type="produto" pInputText [(ngModel)]="produto.itemdesc" />
+              <input disabled="true" style="width: 100%; background-color: #184e34; color: #ffffff; border: none;" id="produto" type="produto" pInputText [(ngModel)]="produto.descricao" />
             </div>
           </ion-col>
           <ion-col size="3">
@@ -103,7 +103,7 @@
           </ion-col>
           <ion-col  size="2">
             <div style="padding-right: 10%">
-              <p-inputNumber [(ngModel)]="produto.retirar" mask="separator.2" [max]="produto.saldo" separatorLimit="1000" inputId="stacked">
+              <p-inputNumber [(ngModel)]="produto.quantidade" mask="separator.2" [max]="produto.saldo" separatorLimit="1000" inputId="stacked">
               </p-inputNumber>
             </div>
           </ion-col>

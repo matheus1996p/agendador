@@ -112,18 +112,10 @@ export class ApiService {
     return this.http.post(`${environment.apiUrl}/confAgendamento`, params);
   }
 
-  setMarcarHorario(pedido, descricao, quantidade, cpf, placa, data, horario){
-    const params = new HttpParams()
-      .set('pedido', pedido)
-      .set('descricao', descricao)
-      .set('quantidade', quantidade)
-      .set('cpf', cpf)
-      .set('placa', placa)
-      .set('data', data)
-      .set('horario', horario)
-      .set('status', 0);
-
-    return this.http.post(`${environment.apiUrl}/marcarHorario`, params);
+  setMarcarHorario(listaProdutos: any[]){
+    const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
+    let listarProdutosJSON = JSON.parse(JSON.stringify(listaProdutos));
+    return this.http.post(`${environment.apiUrl}/marcarHorario`, listarProdutosJSON, {headers});
   }
 
   updateData(){

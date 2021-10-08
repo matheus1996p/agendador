@@ -221,7 +221,8 @@ export class HomePage implements OnInit, OnDestroy {
     this.listaProdutos = this.transfereService.getData();
     if(this.listaProdutos.length > 0){
       this.listaProdutos.forEach(produto => {
-        produto.placa = this.usuarioLogado.placa
+        produto.placa = this.usuarioLogado.placa;
+        produto.cpf = this.usuarioLogado.cpf;
       });
     }
     console.log(this.listaProdutos);
@@ -241,14 +242,19 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   async salvarAgendamento(horario, data) {
-     console.log(horario, data);
-     console.log(this.usuarioLogado);
-     console.log(this.pedidoSelecionado);
 
-    await this.apiService.setMarcarHorario(this.pedidoSelecionado.numero, this.pedidoSelecionado.descricao, this.quantidade, this.usuarioLogado.cpf, this.usuarioLogado.placa, data, horario).pipe(takeUntil(this.ngUnsubscribe)).subscribe( data => {
+    if(this.listaProdutos.length > 0){
+      this.listaProdutos.forEach(produto => {
+        produto.data = data;
+        produto.horario = horario;
+      });
+    }
+
+    await this.apiService.setMarcarHorario(
+      this.listaProdutos).pipe(takeUntil(this.ngUnsubscribe)).subscribe( data => {
       this.presentToast('Horário agendado com sucesso!');
       this.horario = "off";
-      this.pedidoSelecionado = {};
+      this.listaProdutos = [];
       this.carregaHorarios();
     });
   }

@@ -12,12 +12,12 @@
     <h2 align="center">Selecione os Produtos</h2>
     <p-scrollPanel [style]="{width: '100%', height: '500px'}" styleClass="custom">
       <p-pickList [source]="listaProdutos" [target]="produtosSelecionados" sourceHeader="Produtos disponíveis" targetHeader="Produtos selecionados"
-                  [responsive]="true" [sourceStyle]="{'height':'11rem'}" [targetStyle]="{'height':'11rem'}" filterBy="itemdesc"
+                  [responsive]="true" [sourceStyle]="{'height':'11rem'}" [targetStyle]="{'height':'11rem'}" filterBy="descricao"
                   sourceFilterPlaceholder="Buscar produto..." targetFilterPlaceholder="Buscar produto...">
         <ng-template let-product pTemplate="item">
           <div class="product-item">
             <div class="product-list-detail">
-              <span class="product-category"> {{product.itemdesc}}</span>
+              <span class="product-category"> {{product.descricao}}</span>
             </div>
             <div class="product-list-detail">
               <span style="margin-left: 40%;" class="product-category">Quantidade: {{product.saldo}}</span>
