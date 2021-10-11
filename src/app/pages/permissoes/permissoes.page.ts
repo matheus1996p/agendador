@@ -6,6 +6,7 @@ import {AngularFirestore} from "@angular/fire/firestore";
 import {ApiService} from "../../services/api.service";
 import {startWith, takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
+import {Keyboard} from "@ionic-native/keyboard/ngx";
 
 
 interface Conf {
@@ -35,7 +36,8 @@ export class PermissoesPage implements OnInit {
               private afs: AngularFirestore,
               private modalCtrl: ModalController,
               private apiService: ApiService,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController,
+              public keyboard: Keyboard) {
   }
 
   ngOnInit() {

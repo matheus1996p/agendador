@@ -40,14 +40,16 @@
 
             <p-multiSelect [options]="listaNotaConf" [(ngModel)]="usuario.conf"
                            defaultLabel="Selecione as Conf. de Nota" optionLabel="conf"
-                           autoWidth="false" [style]="{'width':'80%'}"
+                           autoWidth="false" [style]="{'width':'100%'}"
+                           [virtualScroll]="true" itemSize="30"
                            selectedItemsLabel="{0} itens selecionados"></p-multiSelect>
 
             <p class="titulo">Configurações de Pedido</p>
 
             <p-multiSelect [options]="listaPedConf" [(ngModel)]="usuario.confped"
                            defaultLabel="Selecione as Conf. de Pedido" optionLabel="conf"
-                           autoWidth="false" [style]="{'width':'80%'}"
+                           autoWidth="false" [style]="{'width':'100%'}"
+                           [virtualScroll]="true" itemSize="30"
                            selectedItemsLabel="{0} itens selecionados"></p-multiSelect>
 
           </div>

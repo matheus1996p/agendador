@@ -100,3 +100,12 @@
 ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
   background-color: #00883c;
 }
+
+::ng-deep .mycontainer {
+  height: 120px;
+}
+
+::ng-deep .chzn-container .chzn-results {
+  max-height: 10px;
+  max-width: 10px;
+}

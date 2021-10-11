@@ -50,7 +50,7 @@ export class ProdutosPage implements OnInit {
 
     const user = await this.authService.getAuth().currentUser;
     // await this.afs.collection('Usuarios').doc(user.uid). ** PEGANDO INFO DO USUARIO LOGADO
-    await this.afs.collection('Usuarios').doc('1b74mbt1RhPZWsDzvcJ7eFSsHUe2'). // PEGANDO INFO DO USUARIO ADMINISTRADOR CONFORME SEU UID
+    await this.afs.collection('Usuarios').doc('PsPEjst1mDVDVXj2bkRSY6yNIiI2'). // PEGANDO INFO DO USUARIO ADMINISTRADOR CONFORME SEU UID
     valueChanges().pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
       this.usuarioLogado = data;
 
