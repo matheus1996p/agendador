@@ -127,6 +127,33 @@ export class PermissoesPage implements OnInit {
     }
   }
 
+  async atualiza(usuario) {
+    await this.presentLoading();
+
+    try {
+      const newUser = Object.assign({}, usuario);
+      delete newUser.senha;
+      newUser.admin = usuario.admin;
+      await this.afs.collection('Usuarios').doc(usuario.uid).update(newUser);
+    } catch (error) {
+      let message: string;
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          message = 'E-mail ja esta sendo utilizado!'
+          break;
+        case 'auth/invalid-email':
+          message = 'E-mail inválido'
+          break;
+        default: message = error.message
+      }
+
+      console.error(error);
+      this.presentToast(message);
+    } finally {
+      this.loading.dismiss();
+    }
+  }
+
   async presentLoading() {
     this.loading = await this.loadingCtrl.create({
       message: 'Por favor, aguarde...'
