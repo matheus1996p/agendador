@@ -43,17 +43,39 @@ export class ProdutosPage implements OnInit {
   }
 
   async getUsuarioLogado() {
+    let confNota = [];
+    let confPed = [];
+    let listConfNota = [];
+    let listConfPed = [];
+
     const user = await this.authService.getAuth().currentUser;
     await this.afs.collection('Usuarios').doc(user.uid).
     valueChanges().pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
       this.usuarioLogado = data;
-      this.carregaPedidos(this.usuarioLogado.cpf);
+
+      this.usuarioLogado.conf.forEach(conf =>{
+        confNota.push(conf);
+      });
+
+      this.usuarioLogado.confped.forEach(confped =>{
+        confPed.push(confped);
+      });
+
+      confNota.forEach(notaConf =>{
+        listConfNota.push(notaConf.cod_conf);
+      });
+
+      confPed.forEach(pedConf =>{
+        listConfPed.push(pedConf.cod_conf);
+      });
+
+      this.carregaPedidos(this.usuarioLogado.cpf, listConfNota.toString(), listConfPed.toString());
     });
   }
 
-  async carregaPedidos(cpf){
+  async carregaPedidos(cpf, confNota, confPedido){
     try{
-      await this.apiService.getVendaFutura(cpf.replaceAll('.', '').replaceAll('-','')).pipe(takeUntil(this.ngUnsubscribe)).subscribe((produtos: any[]) =>{
+      await this.apiService.getVendaFutura(cpf.replaceAll('.', '').replaceAll('-',''), confNota, confPedido).pipe(takeUntil(this.ngUnsubscribe)).subscribe((produtos: any[]) =>{
         this.listaProdutos = produtos;
       })
     } catch (e) {

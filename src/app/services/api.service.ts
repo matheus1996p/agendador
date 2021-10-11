@@ -42,9 +42,11 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}/sql/pedidos/pedidoConf`);
   }
 
-  getVendaFutura(cpf){
+  getVendaFutura(cpf, confNota, confPedido){
     const params = new HttpParams()
-      .set('CPF', cpf);
+      .set('CPF', cpf)
+      .set('CONFNOTA', confNota)
+      .set('CONFPEDIDO', confPedido);
     return this.http.get(`${environment.apiUrl}/sql/pedidos/vendaFutura?${params.toString()}`);
   }
 

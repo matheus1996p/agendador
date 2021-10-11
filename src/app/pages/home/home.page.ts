@@ -91,12 +91,12 @@ export class HomePage implements OnInit, OnDestroy {
 
   }
 
-  async carregaPedidos(cpf){
+  async carregaPedidos(cpf, confNota, confPedido){
     try{
       // await this.apiService.getListaPedidos().pipe(takeUntil(this.ngUnsubscribe)).subscribe((pedidos: any[]) =>{
       //   this.listaPedidos = pedidos;
       // })
-      await this.apiService.getVendaFutura(cpf.replaceAll('.', '').replaceAll('-','')).pipe(takeUntil(this.ngUnsubscribe)).subscribe((pedidos: any[]) =>{
+      await this.apiService.getVendaFutura(cpf.replaceAll('.', '').replaceAll('-',''), confNota, confPedido).pipe(takeUntil(this.ngUnsubscribe)).subscribe((pedidos: any[]) =>{
         this.listaPedidos = pedidos;
       })
     } catch (e) {
@@ -173,8 +173,7 @@ export class HomePage implements OnInit, OnDestroy {
     await this.apiService.getDiasDisponiveis(this.value).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any[]) =>{
       let horario = this.conf.controls['horaInicial'].value;
       let horarios = [];
-      console.log(data.length);
-      console.log(this.conf.controls['horaInicial'].value);
+
       while (this.compararHora(this.conf.controls['horaFinal'].value, horario)) {
         let horarioDisponivel = {label: '', value: ''};
         horario  = this.addMinutes(horario + ':00', this.conf.controls['intervalo'].value);
@@ -225,7 +224,7 @@ export class HomePage implements OnInit, OnDestroy {
         produto.cpf = this.usuarioLogado.cpf;
       });
     }
-    console.log(this.listaProdutos);
+
   }
 
   next(){
@@ -233,7 +232,6 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   onSelect(data){
-    console.log(data.toLocaleDateString('pt-BR'));
     this.carregaHorarios();
   }
 
@@ -282,7 +280,6 @@ export class HomePage implements OnInit, OnDestroy {
     const sabado = conf.sabado ? 1 : 0;
 
     this.apiService.setConfAgendamento(bloqueados, horaInicial, horaFinal, intervalo, domingo, segunda, terca, quarta, quinta, sexta, sabado).pipe(takeUntil(this.ngUnsubscribe)).subscribe( data => {
-      console.log('Configuração Salva');
       this.display = false;
     });
 
@@ -308,11 +305,35 @@ export class HomePage implements OnInit, OnDestroy {
 
 
   async getUsuarioLogado() {
+    let confNota = [];
+    let confPed = [];
+    let listConfNota = [];
+    let listConfPed = [];
+
     const user = await this.authService.getAuth().currentUser;
     await this.afs.collection('Usuarios').doc(user.uid).
     valueChanges().pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
       this.usuarioLogado = data;
-      this.carregaPedidos(this.usuarioLogado.cpf);
+      this.usuarioLogado.conf.forEach(conf =>{
+        confNota.push(conf);
+      });
+
+      this.usuarioLogado.confped.forEach(confped =>{
+        confPed.push(confped);
+      });
+
+      confNota.forEach(notaConf =>{
+        listConfNota.push(notaConf.cod_conf);
+      });
+
+      confPed.forEach(pedConf =>{
+        listConfPed.push(pedConf.cod_conf);
+      });
+
+
+
+
+      this.carregaPedidos(this.usuarioLogado.cpf, listConfNota.toString(), listConfPed.toString());
     });
   }
 
